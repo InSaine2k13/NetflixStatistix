@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NetflixStatistix:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NetflixStatistix_jar</output-path>
+    <root id="archive" name="NetflixStatistix.jar">
+      <element id="module-output" name="NetflixStatistix" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/mssql-jdbc-6.2.2.jre8.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
