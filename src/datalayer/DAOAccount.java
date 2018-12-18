@@ -25,12 +25,12 @@ public class DAOAccount {
     /**
      * Deletes an account from the database with the given name
      */
-    public void delete(String name){
+    public void delete(String name) {
         Connection con = DAOConnection.getInstance().connect();
 
         try {
             Statement st = con.createStatement();
-            String SQL = "Delete FROM dbo.Account WHERE Name = '" + name.replace("'", "char(39)") + "'";
+            String SQL = "Delete FROM dbo.Account WHERE Name = '" + name + "'";
             st.execute(SQL);
 
         } catch (
@@ -48,12 +48,12 @@ public class DAOAccount {
     /**
      * Creates a new account
      */
-    public void newAccount (String name, String street, String houseNumber, String houseNumberAddition, String Residence) {
+    public void newAccount(String name, String street, String houseNumber, String houseNumberAddition, String Residence) {
         Connection con = DAOConnection.getInstance().connect();
 
         try {
             Statement st = con.createStatement();
-            String SQL = "INSERT INTO Account(Name, Street, HouseNumber, HouseNumberAddition, Residence) VALUES ('" + name +  "','" + street + "','" + houseNumber + "','" + houseNumberAddition + "','" + Residence + "')";
+            String SQL = "INSERT INTO Account(Name, Street, HouseNumber, HouseNumberAddition, Residence) VALUES ('" + name + "','" + street + "','" + houseNumber + "','" + houseNumberAddition + "','" + Residence + "')";
             st.execute(SQL);
 
         } catch (
@@ -71,12 +71,12 @@ public class DAOAccount {
     /**
      * Saves changes to old account
      */
-    public void saveAccount (String name, String street, String houseNumber, String houseNumberAddition, String Residence) {
+    public void saveAccount(String name, String street, String houseNumber, String houseNumberAddition, String Residence) {
         Connection con = DAOConnection.getInstance().connect();
 
         try {
             Statement st = con.createStatement();
-            String SQL = "UPDATE Account SET Street = '"+ street + "', HouseNumber = '" + houseNumber + "', HouseNumberAddition = '"+ houseNumberAddition +"', Residence = '" + Residence + "' WHERE Account.Name = '" + name +"'";
+            String SQL = "UPDATE Account SET Street = '" + street + "', HouseNumber = '" + houseNumber + "', HouseNumberAddition = '" + houseNumberAddition + "', Residence = '" + Residence + "' WHERE Account.Name = '" + name + "'";
             st.execute(SQL);
 
         } catch (
@@ -93,6 +93,7 @@ public class DAOAccount {
 
     /**
      * Gets an account from the database with the given name
+     *
      * @param name
      * @return account
      */
@@ -105,7 +106,7 @@ public class DAOAccount {
             String SQL = "SELECT * FROM dbo.Account WHERE Name = '" + name.replace("'", "char(39)") + "'";
             ResultSet rs = st.executeQuery(SQL);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 account = new Account(
                         rs.getString("Name"),
                         rs.getString("Street"),
@@ -133,6 +134,7 @@ public class DAOAccount {
 
     /**
      * Gets all Accounts from the database and returns them.
+     *
      * @return Set with all accounts.
      */
     public Set<Account> readAll() {
@@ -144,7 +146,7 @@ public class DAOAccount {
             String SQL = "SELECT * FROM dbo.Account";
             ResultSet rs = st.executeQuery(SQL);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 Account ac = new Account(
                         rs.getString("Name"),
                         rs.getString("Street"),
@@ -173,7 +175,7 @@ public class DAOAccount {
     }
 
     public static DAOAccount getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new DAOAccount();
         }
         return instance;
