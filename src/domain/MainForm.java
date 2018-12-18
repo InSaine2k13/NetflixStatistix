@@ -78,6 +78,7 @@ public class MainForm extends JFrame {
         serieWatchLengthTab.addComponentListener(new ComponentAdapter() {
         });
         refreshBtn.addActionListener(new RefreshAccountsBtnListener(accountsTable, this));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
