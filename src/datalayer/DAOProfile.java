@@ -19,6 +19,7 @@ public class DAOProfile {
 
     /**
      * reads all profiles from the database for the given account.
+     *
      * @param account
      * @return list with the profiles of the account
      */
@@ -28,13 +29,13 @@ public class DAOProfile {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.Profile WHERE AccountID = (SELECT ID FROM dbo.Account WHERE Name = '"+ account.getName() +"')";
+            String SQL = "SELECT * FROM dbo.Profile WHERE AccountID = (SELECT ID FROM dbo.Account WHERE Name = '" + account.getName() + "')";
             ResultSet rs = st.executeQuery(SQL);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 java.sql.Date sqlDate = rs.getDate("DateOfBirth");
-                GregorianCalendar calendar = new GregorianCalendar();
-                calendar.setTime(new Date(sqlDate.getTime()));
+                Date calendar = new Date();
+                calendar.getTime();
 
                 Profile p = new Profile(
                         rs.getString("Name"),
@@ -63,6 +64,7 @@ public class DAOProfile {
 
     /**
      * reads all id's of the profiles of the given account
+     *
      * @param account
      * @return set with all profile id's
      */
@@ -72,10 +74,10 @@ public class DAOProfile {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT ID FROM dbo.Profile WHERE AccountID = (SELECT ID FROM dbo.Account WHERE Name = '"+ account.getName() +"')";
+            String SQL = "SELECT ID FROM dbo.Profile WHERE AccountID = (SELECT ID FROM dbo.Account WHERE Name = '" + account.getName() + "')";
             ResultSet rs = st.executeQuery(SQL);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 profileIDs.add(rs.getInt("ID"));
             }
         } catch (
@@ -94,6 +96,7 @@ public class DAOProfile {
 
     /**
      * reads the watched programs of the given profile
+     *
      * @param profileID
      * @return map with the program and percentage watched
      */
@@ -106,7 +109,7 @@ public class DAOProfile {
             String SQL = "SELECT * FROM dbo.WatchedPrograms WHERE ProfileID = " + profileID;
             ResultSet rs = st.executeQuery(SQL);
 
-            while(rs.next()) {
+            while (rs.next()) {
 
                 Program p = DAOProgram.getInstance().read(rs.getString("ProgramTitle"));
                 int watchedPercentage = rs.getInt("WatchedPercentage");
@@ -126,7 +129,7 @@ public class DAOProfile {
     }
 
     public static DAOProfile getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new DAOProfile();
         }
         return instance;
@@ -160,5 +163,25 @@ public class DAOProfile {
             }
         }
         return profiles;
+    }
+
+    public void newProfile(String DateOfBirth, String AcountID, String ProfileName) {
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String SQL = "INSERT INTO Profile(DateOfBirth, AccountID, Name) VALUES ('" + DateOfBirth + "', (SELECT ID FROM Account WHERE [Name]='" + AcountID + "') ,'" + ProfileName + "')";
+            st.execute(SQL);
+
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
