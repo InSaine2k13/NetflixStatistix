@@ -103,7 +103,7 @@ public class DAOAccount {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.Account WHERE Name = '" + name.replace("'", "char(39)") + "'";
+            String SQL = "SELECT * FROM dbo.Account WHERE Name = '" + name + "'";
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
