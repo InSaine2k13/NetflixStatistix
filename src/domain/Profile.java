@@ -1,17 +1,25 @@
 package domain;
 
+import actionListeners.SaveProfileBtnListener;
+
 import javax.swing.*;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Profile extends JFrame{
-    private String name;
-    private Calendar dateOfBirth;
+
+
 
     /**
      * Program program
      * Integer watchedPercentage
      */
+    private boolean editing;
+    private String name;
+    private Date dateOfBirth;
+    private String AcountID;
+    private String date;
+
     private HashMap<Program, Integer> watchedPrograms;
     private JPanel Labels;
     private JLabel usernameLbl;
@@ -19,13 +27,25 @@ public class Profile extends JFrame{
     private JPanel Textfields;
     private JTextField userNameTxt;
     private JTextField firstNameTxt;
+    private JTextField AccountName1;
     private JButton saveButton;
     private JPanel panel1;
+    private JTextField AccountName;
+    private JTable accountsTable;
 
-    public Profile(String name, Calendar dateOfBirth, HashMap<Program, Integer> watchedPrograms) {
+    public Profile(String name, Date dateOfBirth, HashMap<Program, Integer> watchedPrograms) {
+        this.editing=true;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.watchedPrograms = watchedPrograms;
+        buildForm();
+    }
+
+    public Profile(JTable accountsTable) {
+        this.editing = false;
+        userNameTxt.setEditable(true);
+        this.accountsTable=accountsTable;
+        buildForm();
     }
 
     public void buildForm(){
@@ -33,6 +53,11 @@ public class Profile extends JFrame{
 
         setTitle("Account");
         setSize(600,600);
+        userNameTxt.setText(name);
+        firstNameTxt.setText(date);
+        AccountName1.setText(AcountID);
+
+        saveButton.addActionListener(new SaveProfileBtnListener(editing, userNameTxt,firstNameTxt,AccountName1));
     }
 
     public String getName() {
@@ -43,11 +68,11 @@ public class Profile extends JFrame{
         this.name = name;
     }
 
-    public Calendar getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Calendar dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
