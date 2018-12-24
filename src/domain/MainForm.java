@@ -73,6 +73,7 @@ public class MainForm extends JFrame {
         newAccountBtn.addActionListener(new NewAccountBtnListener());
         editAccountBtn.addActionListener(new EditAccountBtnListener(accountsTable));
         deleteAccountBtn.addActionListener(new DeleteAccountBtnListener(accountsTable));
+        createProfileBtn.addActionListener(new AddProfileBtnListener(accountsTable));
 
 
         serieWatchLengthTab.addComponentListener(new ComponentAdapter() {
