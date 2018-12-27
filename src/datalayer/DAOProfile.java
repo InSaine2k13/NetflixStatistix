@@ -184,4 +184,46 @@ public class DAOProfile {
             }
         }
     }
+
+    public void saveProfile(String accountname, String name, String id) {
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+                String SQL = "UPDATE Profile SET [Name] = '" + name + "' WHERE Profile.[Name] = '" + accountname + "' AND Profile.AccountID = '" + id + "'";
+            st.execute(SQL);
+
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+        }
+    }
+
+}
+
+    public void delete(String name) {
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String SQL = "Delete FROM dbo.Profile WHERE Name = '" + name + "'";
+            st.execute(SQL);
+
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

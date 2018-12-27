@@ -1,28 +1,19 @@
 package actionListeners;
 
-import datalayer.DAOAccount;
-import datalayer.DAOConnection;
 import datalayer.DAOProfile;
-import domain.Account;
-import domain.Profile;
-import domain.Program;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 
 public class SaveProfileBtnListener implements ActionListener {
+    private String saccountname;
+    private String sname;
     private boolean editing = false;
     private JTextField name;
     private String Date;
     private JTextField AccountName;
+    private String ID;
 
     public SaveProfileBtnListener(boolean editing, JTextField name, JTextField date, JTextField accountsTable) {
         this.editing = editing;
@@ -32,13 +23,21 @@ public class SaveProfileBtnListener implements ActionListener {
 
     }
 
+    public SaveProfileBtnListener(boolean b, String name, String change, String AcID) {
+        this.editing=b;
+        this.sname= name;
+        this.saccountname=change;
+        this.ID=AcID;
+        DAOProfile.getInstance().saveProfile(sname, saccountname, ID);
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!editing) {
-            DAOProfile.getInstance().newProfile(Date, AccountName.getText(), name.getText());
-        } else {
+        if (editing) {
 
+        } else {
+            DAOProfile.getInstance().newProfile(Date, AccountName.getText(), name.getText());
         }
     }
 }

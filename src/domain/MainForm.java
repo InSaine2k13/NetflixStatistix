@@ -7,8 +7,6 @@ import applicationlayer.SerieController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.util.Map;
 import java.util.Set;
@@ -49,6 +47,9 @@ public class MainForm extends JFrame {
     private JTable accountsTable;
     private JTable profileTable;
     private JButton refreshBtn;
+    private JLabel usernameLbl;
+    private JTextField EditprofielNameTxt1;
+    private JTextField EditIDNR;
     private JButton terugButton;
 
     /**
@@ -74,6 +75,8 @@ public class MainForm extends JFrame {
         editAccountBtn.addActionListener(new EditAccountBtnListener(accountsTable));
         deleteAccountBtn.addActionListener(new DeleteAccountBtnListener(accountsTable));
         createProfileBtn.addActionListener(new AddProfileBtnListener(accountsTable));
+        newProfileBtn.addActionListener(new EditProfilBtnListener(profileTable, EditprofielNameTxt1, EditIDNR));
+        deleteProfileBtn.addActionListener(new DeleteProfileBtnListener(profileTable));
 
 
         serieWatchLengthTab.addComponentListener(new ComponentAdapter() {

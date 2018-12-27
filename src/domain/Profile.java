@@ -1,6 +1,7 @@
 package domain;
 
 import actionListeners.SaveProfileBtnListener;
+import datalayer.DAOProfile;
 
 import javax.swing.*;
 import java.util.Date;
@@ -38,20 +39,24 @@ public class Profile extends JFrame{
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.watchedPrograms = watchedPrograms;
+        userNameTxt.setEditable(false);
         buildForm();
     }
 
     public Profile(JTable accountsTable) {
         this.editing = false;
         userNameTxt.setEditable(true);
-        this.accountsTable=accountsTable;
         buildForm();
+    }
+
+    public void Edit(Profile p, String name, String ID){
+        new SaveProfileBtnListener(true, p.name, name, ID);
     }
 
     public void buildForm(){
         add(panel1);
 
-        setTitle("Account");
+        setTitle("Profile");
         setSize(600,600);
         userNameTxt.setText(name);
         firstNameTxt.setText(date);
