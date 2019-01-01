@@ -52,9 +52,7 @@
                 <children>
                   <component id="96835" class="javax.swing.JTable" binding="accountsTable">
                     <constraints/>
-                    <properties>
-                      <enabled value="false"/>
-                    </properties>
+                    <properties/>
                   </component>
                 </children>
               </scrollpane>
@@ -117,9 +115,7 @@
                 <children>
                   <component id="ff4d4" class="javax.swing.JTable" binding="profileTable">
                     <constraints/>
-                    <properties>
-                      <enabled value="false"/>
-                    </properties>
+                    <properties/>
                   </component>
                 </children>
               </scrollpane>
@@ -195,9 +191,7 @@
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
-                <properties>
-                  <enabled value="false"/>
-                </properties>
+                <properties/>
               </component>
               <component id="ab142" class="javax.swing.JButton" binding="selectSerieBtn">
                 <constraints>
@@ -223,9 +217,7 @@
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
-                <properties>
-                  <enabled value="false"/>
-                </properties>
+                <properties/>
               </component>
               <component id="64721" class="javax.swing.JTable" binding="AccountSerieTable">
                 <constraints>
@@ -233,9 +225,7 @@
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
-                <properties>
-                  <enabled value="false"/>
-                </properties>
+                <properties/>
               </component>
               <component id="4ffb6" class="javax.swing.JButton" binding="kiesSerieEnAccountButton" default-binding="true">
                 <constraints>
