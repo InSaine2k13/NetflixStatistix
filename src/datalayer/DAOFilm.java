@@ -53,6 +53,40 @@ public class DAOFilm {
         return film;
     }
 
+    // Reads the most watched child film from the database
+    public Film readMostWatchedChildFilm() {
+        Film film = null;
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String SQL = "SELECT [Title],[ProgramType],p.[ID],Duration FROM [NetflixStatistix].[dbo].[Program] p INNER JOIN Film f ON p.id = f.ProgramID WHERE ProgramType = 'Film' AND Duration = (SELECT MAX(Duration) From Program) AND f.[AgeIndication] <= 16";
+            ResultSet rs = st.executeQuery(SQL);
+
+            while(rs.next()) {
+                film = new Film(
+                        rs.getString("ProgramTitle"),
+                        rs.getInt("Duration"),
+                        rs.getString("Genre"),
+                        rs.getString("Language"),
+                        rs.getInt("AgeIndication")
+                );
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return film;
+    }
+
+
     public static DAOFilm getInstance() {
         if(instance == null) {
             instance =  new DAOFilm();
