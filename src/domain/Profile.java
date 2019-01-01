@@ -31,8 +31,7 @@ public class Profile extends JFrame{
     private JTextField AccountName1;
     private JButton saveButton;
     private JPanel panel1;
-    private JTextField AccountName;
-    private JTable accountsTable;
+    private JLabel AccountNameLbl;
 
     public Profile(String name, Date dateOfBirth, HashMap<Program, Integer> watchedPrograms) {
         this.editing=true;
@@ -44,8 +43,10 @@ public class Profile extends JFrame{
     }
 
     public Profile(JTable accountsTable) {
+
         this.editing = false;
         userNameTxt.setEditable(true);
+        this.AcountID=accountsTable.getValueAt(accountsTable.getSelectedRow(),0).toString();
         buildForm();
     }
 

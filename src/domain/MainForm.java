@@ -47,7 +47,6 @@ public class MainForm extends JFrame {
     private JTable accountsTable;
     private JTable profileTable;
     private JButton refreshBtn;
-    private JLabel usernameLbl;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
@@ -77,7 +76,8 @@ public class MainForm extends JFrame {
         createProfileBtn.addActionListener(new AddProfileBtnListener(accountsTable));
         newProfileBtn.addActionListener(new EditProfilBtnListener(profileTable, EditprofielNameTxt1, EditIDNR));
         deleteProfileBtn.addActionListener(new DeleteProfileBtnListener(profileTable));
-
+        watchEpisodeBtn.addActionListener(new profileWatchlist(profileTable,"Serie"));
+        watchMovieBtn.addActionListener(new profileWatchlist(profileTable, "Film"));
 
         serieWatchLengthTab.addComponentListener(new ComponentAdapter() {
         });
@@ -89,19 +89,19 @@ public class MainForm extends JFrame {
      * Fills the table on the Serie kijksduur account page with all series.
      */
     public void populateAccountSerieTable() {
-        AccountSerieTable.setModel(new DefaultTableModel(
-                new Object [][] {
+            AccountSerieTable.setModel(new DefaultTableModel(
+                    new Object [][] {
 
-                },
-                new String [] {
-                        "Titel"
-                }
-        ));
+                    },
+                    new String [] {
+                            "Titel"
+                    }
+            ));
 
-        //get all series
-        Set<Serie> series = SerieController.getInstance().readAllSeries();
-        DefaultTableModel model = (DefaultTableModel) AccountSerieTable.getModel();
-        Object rowData[] = new Object[1];
+            //get all series
+            Set<Serie> series = SerieController.getInstance().readAllSeries();
+            DefaultTableModel model = (DefaultTableModel) AccountSerieTable.getModel();
+            Object rowData[] = new Object[1];
 
         for(Serie s : series) {
             rowData[0] = s.getTitle();
