@@ -40,8 +40,8 @@ public class MainForm extends JFrame {
     private JButton watchEpisodeBtn;
     private JButton createProfileBtn;
     private JButton selectSerieBtn;
-    private JTable serieTable;
     private JButton kiesSerieEnAccountButton;
+    private JTable serieTable;
     private JTable serieAccountTable;
     private JTable AccountSerieTable;
     private JTable accountsTable;
@@ -60,6 +60,8 @@ public class MainForm extends JFrame {
 
         setTitle("Netflix Statistix");
         setSize(800,800);
+
+        disableEditingTables();
 
         populateSerieTable();
         populateAccountSerieTable();
@@ -270,5 +272,13 @@ public class MainForm extends JFrame {
             rowData[0] = p.getName();
             model.addRow(rowData);
         }
+    }
+
+    public void disableEditingTables(){
+        serieTable.setDefaultEditor(Object.class, null);
+        profileTable.setDefaultEditor(Object.class, null);
+        accountsTable.setDefaultEditor(Object.class, null);
+        serieAccountTable.setDefaultEditor(Object.class, null);
+        AccountSerieTable.setDefaultEditor(Object.class, null);
     }
 }
