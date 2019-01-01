@@ -64,9 +64,7 @@ public class MainForm extends JFrame {
         populateSerieTable();
         populateAccountSerieTable();
         populateSerieAccountTable();
-
         populateAccountTable();
-
         populateProfileTable();
 
         selectSerieBtn.addActionListener(new SelectSerieBtnListener(serieTable, this, selectSerieBtn));
