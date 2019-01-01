@@ -226,4 +226,26 @@ public class DAOProfile {
             }
         }
     }
+
+    public void newWatchedSerie(String Serie, String Episode, String Profile) {
+        Connection con = DAOConnection.getInstance().connect();
+        System.out.println(Serie);
+        System.out.println(Episode);
+        System.out.println(Profile);
+//        try {
+//            Statement st = con.createStatement();
+//            String SQL = "INSERT INTO WatchedPrograms(ProfileID, ProgramTitle) VALUES ((SELECT ID FROM Profile WHERE [Name] = '"+Profile+"'), '" + Serie + "')";
+//            st.execute(SQL);
+//
+//        } catch (
+//                SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                con.close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+    }
 }

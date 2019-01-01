@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * this class is used to execute sql queries for episodes.
@@ -62,7 +64,7 @@ public class DAOEpisode {
         try {
             Statement st = con.createStatement();
             String title = s.getTitle();
-            String SQL1 = "SELECT * FROM dbo.Episode e INNER JOIN dbo.Program p on p.Title = e.ProgramTitle WHERE SerieTitle = '" + title.replace("'", "char(39)") + "'";
+            String SQL1 = "SELECT * FROM dbo.Episode e INNER JOIN dbo.Program p on p.ID = e.ProgramID WHERE SerieTitle = '" + title.replace("'", "char(39)") + "'";
             ResultSet rs = st.executeQuery(SQL1);
 
             while (rs.next()) {
@@ -91,5 +93,40 @@ public class DAOEpisode {
             instance = new DAOEpisode();
         }
         return instance;
+    }
+
+    public Set<Episode> readAll() {
+        HashSet<Episode> Films = new HashSet<>();
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramID= Program.ID";
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+
+                Episode s = new Episode(
+                        rs.getString("ProgramTitle"),
+                        rs.getInt("Duration"),
+                        rs.getInt("EpisodeNr")
+                );
+
+
+
+                Films.add(s);
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return Films;
     }
 }

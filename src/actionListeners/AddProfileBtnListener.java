@@ -18,6 +18,8 @@ private JTable accountTable;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-           new Profile(accountTable).setVisible(true);
+        if (accountTable.getSelectedRow() > -1) {
+            new Profile(accountTable).setVisible(true);
+        }
     }
 }

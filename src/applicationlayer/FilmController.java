@@ -1,5 +1,6 @@
 package applicationlayer;
 
+import datalayer.DAOFilm;
 import domain.Account;
 import domain.Film;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -11,12 +12,21 @@ import java.util.Set;
  */
 public class FilmController {
 
+    private static FilmController instance;
+
+    public static FilmController getInstance() {
+        if(instance == null) {
+            instance = new FilmController();
+        }
+        return instance;
+    }
+
     /**
      * Gets all films from the datasource.
      * @return all films.
      */
     public Set<Film> readAllFilms() {
-        throw new NotImplementedException();
+        return DAOFilm.getInstance().readAll();
     }
 
     /**

@@ -13,15 +13,16 @@ public class EditProfilBtnListener implements ActionListener {
     private JTable profileTable;
     private JTextField Edit;
 
-    public EditProfilBtnListener(JTable profileTable, JTextField Edit, JTextField accountnr){
+    public EditProfilBtnListener(JTable profileTable, JTextField Edit, JTextField accountnr) {
         this.profileTable = profileTable;
-        this.Edit=Edit;
-        this.id=accountnr;
+        this.Edit = Edit;
+        this.id = accountnr;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Profile p =new Profile(profileTable.getValueAt(profileTable.getSelectedRow(),0).toString(),null,null);
-        p.Edit(p,this.Edit.getText(), id.getText());
+        if (profileTable.getSelectedRow() > -1) {
+            new Profile(profileTable.getValueAt(profileTable.getSelectedRow(), 0).toString(), null, null).setVisible(true);
+        }
     }
 }

@@ -11,12 +11,14 @@ import java.awt.event.ActionListener;
 public class DeleteAccountBtnListener implements ActionListener {
     private JTable accountsTable;
 
-    public DeleteAccountBtnListener(JTable accountsTable){
+    public DeleteAccountBtnListener(JTable accountsTable) {
         this.accountsTable = accountsTable;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DAOAccount.getInstance().delete((accountsTable.getValueAt(accountsTable.getSelectedRow(), accountsTable.getSelectedColumn())).toString());
+        if (accountsTable.getSelectedRow() > -1) {
+            DAOAccount.getInstance().delete((accountsTable.getValueAt(accountsTable.getSelectedRow(), accountsTable.getSelectedColumn())).toString());
+        }
     }
 }

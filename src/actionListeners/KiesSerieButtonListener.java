@@ -23,7 +23,7 @@ public class KiesSerieButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonText = kiesSerieEnAccountButton.getText();
-
+        if (serieAccountTable.getSelectedRow()>-1){
         if(buttonText.equals("Terug")) {
             //reset the table to original state.
             mainForm.populateSerieAccountTable();
@@ -48,5 +48,6 @@ public class KiesSerieButtonListener implements ActionListener {
             mainForm.populateSerieAccountTableWithAverageWatchTimePerEpisode(selctedSerie, selectedAccount);
             kiesSerieEnAccountButton.setText("Terug");
         }
+    }
     }
 }
