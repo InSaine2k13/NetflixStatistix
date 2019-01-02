@@ -16,7 +16,7 @@ public class EditAccountBtnListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (accountsTable.getSelectedRow()>-1){
-        new Account(accountsTable.getValueAt(accountsTable.getSelectedRow(),0).toString(), accountsTable.getValueAt(accountsTable.getSelectedRow(),1).toString(), accountsTable.getValueAt(accountsTable.getSelectedRow(),2).toString(), accountsTable.getValueAt(accountsTable.getSelectedRow(),3).toString(), accountsTable.getValueAt(accountsTable.getSelectedRow(),4).toString(), null).setVisible(true);
-    }
+            new Account(accountsTable.getValueAt(accountsTable.getSelectedRow(),0).toString(), accountsTable.getValueAt(accountsTable.getSelectedRow(),1).toString(), accountsTable.getValueAt(accountsTable.getSelectedRow(),2).toString(), accountsTable.getValueAt(accountsTable.getSelectedRow(),3).toString(), accountsTable.getValueAt(accountsTable.getSelectedRow(),4).toString(), null).setVisible(true);
+        }
     }
 }

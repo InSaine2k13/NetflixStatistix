@@ -7,6 +7,10 @@ public class AccountsList extends JFrame {
     private JButton selectBtn;
     private JList Accounts;
 
+    public AccountsList(){
+        buildForm();
+    }
+
     public void buildForm(){
         add(panel1);
 

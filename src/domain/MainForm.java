@@ -81,6 +81,7 @@ public class MainForm extends JFrame {
         deleteProfileBtn.addActionListener(new DeleteProfileBtnListener(profileTable));
         watchEpisodeBtn.addActionListener(new profileWatchlist(profileTable,"Serie"));
         watchMovieBtn.addActionListener(new profileWatchlist(profileTable, "Film"));
+        selectAccountButton.addActionListener(new SelectAccountBtnListener());
 
         serieWatchLengthTab.addComponentListener(new ComponentAdapter() {
         });

@@ -54,6 +54,7 @@ public class Account extends JFrame{
 
         buildForm();
     }
+
     public void buildForm(){
         add(panel1);
 
