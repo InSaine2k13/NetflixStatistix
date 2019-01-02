@@ -33,7 +33,6 @@ public class MainForm extends JFrame {
     private JButton selectMovieButton;
     private JLabel amountOfCompletedViewersLbl;
     private JButton selectSerieButton;
-    private JList singleProfileAccountsList;
     private JLabel kidMovieNameLbl;
     private JLabel kidMovieLengthLbl;
     private JList watchedMoviesList;
@@ -48,6 +47,7 @@ public class MainForm extends JFrame {
     private JTable accountsTable;
     private JTable profileTable;
     private JButton refreshBtn;
+    private JTable singleProfileAccountsTable;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
@@ -66,10 +66,10 @@ public class MainForm extends JFrame {
         populateSerieTable();
         populateAccountSerieTable();
         populateSerieAccountTable();
-
         populateAccountTable();
-
         populateProfileTable();
+        populateLongestDurationChildFilm();
+        populateSingleProfileAccountsTable();
 
         selectSerieBtn.addActionListener(new SelectSerieBtnListener(serieTable, this, selectSerieBtn));
         kiesSerieEnAccountButton.addActionListener(new KiesSerieButtonListener(this, serieAccountTable, AccountSerieTable, kiesSerieEnAccountButton));
@@ -281,11 +281,42 @@ public class MainForm extends JFrame {
         kidMovieLengthLbl.setText(Integer.toString(longestDurationChildFilm.duration));
     }
 
+    public void populateSingleProfileAccountsTable(){
+        singleProfileAccountsTable.setModel(new DefaultTableModel(
+                new Object[][] {
+
+                },
+                new String [] {
+                        "Naam",
+                        "Straat",
+                        "Housenummer",
+                        "Toevoeging huisnummer",
+                        "Woonplaats"
+                }
+        ));
+
+        //get all single profile accounts
+        Set<Account> singleProfileAccounts = AccountController.getInstance().readAllSingleProfileAccounts();
+        DefaultTableModel model = (DefaultTableModel) singleProfileAccountsTable.getModel();
+        Object rowData[] = new Object[5];
+
+
+        for(Account a : singleProfileAccounts){
+            rowData[0] = a.getName();
+            rowData[1] = a.getStreet();
+            rowData[2] = a.getHouseNumber();
+            rowData[3] = a.getHouseNumberAddition();
+            rowData[4] = a.getResidence();
+            model.addRow(rowData);
+        }
+    }
+
     public void disableEditingTables(){
         serieTable.setDefaultEditor(Object.class, null);
         profileTable.setDefaultEditor(Object.class, null);
         accountsTable.setDefaultEditor(Object.class, null);
         serieAccountTable.setDefaultEditor(Object.class, null);
         AccountSerieTable.setDefaultEditor(Object.class, null);
+        singleProfileAccountsTable.setDefaultEditor(Object.class, null);
     }
 }

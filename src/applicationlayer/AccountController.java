@@ -42,6 +42,14 @@ public class AccountController {
     }
 
     /**
+     * Gets all accounts from the datasource with a single profile
+     * @return all accounts with single profile
+     */
+    public Set<Account> readAllSingleProfileAccounts() {
+        return DAOAccount.getInstance().readAllSingleProfileAccounts();
+    }
+
+    /**
      * Removes the account from the datasource.
      * @param account
      */

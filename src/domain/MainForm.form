@@ -308,7 +308,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="25227" class="javax.swing.JList" binding="singleProfileAccountsList">
+                  <component id="6c86e" class="javax.swing.JTable" binding="singleProfileAccountsTable">
                     <constraints/>
                     <properties/>
                   </component>

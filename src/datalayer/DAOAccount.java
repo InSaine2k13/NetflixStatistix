@@ -174,10 +174,53 @@ public class DAOAccount {
         return accounts;
     }
 
+    /**
+     * Gets all Accounts with a single profile from the database and returns them.
+     *
+     * @return Set with all accounts with a single profile.
+     */
+    public Set<Account> readAllSingleProfileAccounts() {
+        Set<Account> accounts = new HashSet<>();
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String SQL = "SELECT Account.* FROM [NetflixStatistix].[dbo].[Profile] INNER JOIN Account On Profile.AccountID = Account.ID WHERE AccountID IN (SELECT AccountID FROM Profile   GROUP BY  AccountID HAVING (COUNT(AccountID)) = 1)";
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                Account ac = new Account(
+                        rs.getString("Name"),
+                        rs.getString("Street"),
+                        rs.getString("HouseNumber"),
+                        rs.getString("HouseNumberAddition"),
+                        rs.getString("Residence"),
+                        null);
+
+                ArrayList<Profile> profiles = DAOProfile.getInstance().readAllProfilesForAccount(ac);
+                ac.setProfiles(profiles);
+
+                accounts.add(ac);
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return accounts;
+    }
+
     public static DAOAccount getInstance() {
         if (instance == null) {
             instance = new DAOAccount();
         }
         return instance;
     }
+
 }
