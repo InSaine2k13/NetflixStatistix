@@ -34,8 +34,8 @@ public class FilmController {
      * and the age indication is below 16 years
      * @return longest watched children film
      */
-    public Film readLongestWatchedChildrenFilm() {
-        throw new NotImplementedException();
+    public Film readLongestDurationChildrenFilm() {
+        return DAOFilm.getInstance().readLongestDurationChildFilm();
     }
 
     /**

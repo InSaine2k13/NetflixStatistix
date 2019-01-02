@@ -2,6 +2,7 @@ package domain;
 
 import actionListeners.*;
 import applicationlayer.AccountController;
+import applicationlayer.FilmController;
 import applicationlayer.ProfileController;
 import applicationlayer.SerieController;
 
@@ -272,6 +273,12 @@ public class MainForm extends JFrame {
             rowData[0] = p.getName();
             model.addRow(rowData);
         }
+    }
+
+    public void populateLongestDurationChildFilm(){
+        Film longestDurationChildFilm = FilmController.getInstance().readLongestDurationChildrenFilm();
+        kidMovieNameLbl.setText(longestDurationChildFilm.title);
+        kidMovieLengthLbl.setText(Integer.toString(longestDurationChildFilm.duration));
     }
 
     public void disableEditingTables(){
