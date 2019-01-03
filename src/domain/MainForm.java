@@ -11,7 +11,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ComponentAdapter;
 import java.util.Map;
 import java.util.Set;
-//test
 public class MainForm extends JFrame {
     private JPanel panel1;
     private JTabbedPane tabbedPane;
