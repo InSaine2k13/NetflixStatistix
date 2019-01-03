@@ -101,15 +101,15 @@ public class DAOEpisode {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramID= Program.ID";
+            String SQL = "SELECT Title, Duration, EpisodeNr FROM dbo.Episode e INNER JOIN dbo.Program p ON e.ProgramID= p.ID";
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
 
                 Episode s = new Episode(
-                        rs.getString("ProgramTitle"),
+                        rs.getString("Title"),
                         rs.getInt("Duration"),
-                        rs.getInt("EpisodeNr")
+                        rs.getInt("episodeNr")
                 );
 
 
