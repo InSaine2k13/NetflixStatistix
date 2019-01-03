@@ -60,7 +60,7 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT Title,ProgramType,p.ID,Duration,f.AgeIndication, F.Genre, F.Language FROM Program p INNER JOIN Film f ON p.id = f.ProgramID WHERE ProgramType = 'Film' AND Duration = (SELECT MAX(Duration) From Program) AND f.AgeIndication < 16";
+            String SQL = "SELECT Title,ProgramType,p.ID,Duration,f.AgeIndication, F.Genre, F.[Language] FROM Program p INNER JOIN Film f ON p.id = f.ProgramID WHERE ProgramType = 'Film' AND Duration = (SELECT MAX(Duration) From Program WHERE ID IN (SELECT ProgramID FROM Film WHERE AgeIndication < '16') )";
             ResultSet rs = st.executeQuery(SQL);
 
             while(rs.next()) {
