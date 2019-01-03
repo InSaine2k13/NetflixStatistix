@@ -77,16 +77,15 @@ public class MainForm extends JFrame {
         kiesSerieEnAccountButton.addActionListener(new KiesSerieButtonListener(this, serieAccountTable, AccountSerieTable, kiesSerieEnAccountButton));
         newAccountBtn.addActionListener(new NewAccountBtnListener());
         editAccountBtn.addActionListener(new EditAccountBtnListener(accountsTable));
-        deleteAccountBtn.addActionListener(new DeleteAccountBtnListener(accountsTable));
+        deleteAccountBtn.addActionListener(new DeleteAccountBtnListener(this,accountsTable));
         createProfileBtn.addActionListener(new AddProfileBtnListener(accountsTable));
         newProfileBtn.addActionListener(new EditProfilBtnListener(profileTable, EditIDNR));
-        deleteProfileBtn.addActionListener(new DeleteProfileBtnListener(profileTable));
+        deleteProfileBtn.addActionListener(new DeleteProfileBtnListener(this,profileTable));
         watchEpisodeBtn.addActionListener(new profileWatchlist(profileTable,"Serie"));
         watchMovieBtn.addActionListener(new profileWatchlist(profileTable, "Film"));
         selectAccountButton.addActionListener(new SelectAccountBtnListener(watchedMoviesList,list1));
 
-        serieWatchLengthTab.addComponentListener(new ComponentAdapter() {
-        });
+        serieWatchLengthTab.addComponentListener(new ComponentAdapter() {});
         refreshBtn.addActionListener(new RefreshAccountsBtnListener(accountsTable, this));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

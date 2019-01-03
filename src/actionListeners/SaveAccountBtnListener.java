@@ -28,10 +28,14 @@ public class SaveAccountBtnListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(editing) {
-            DAOAccount.getInstance().saveAccount(name.getText(), street.getText(), houseNumber.getText(), houseNumberAddition.getText(), residence.getText());
-        } else {
-            DAOAccount.getInstance().newAccount(name.getText(), street.getText(), houseNumber.getText(), houseNumberAddition.getText(), residence.getText());
+        if ((houseNumberAddition.getText()).length() > 1) {
+            JOptionPane.showMessageDialog(null, "House number addition can only be one character max.", "House number addition", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            if(editing) {
+                DAOAccount.getInstance().saveAccount(name.getText(), street.getText(), houseNumber.getText(), houseNumberAddition.getText(), residence.getText());
+            } else {
+                DAOAccount.getInstance().newAccount(name.getText(), street.getText(), houseNumber.getText(), houseNumberAddition.getText(), residence.getText());
+            }
         }
     }
 }
