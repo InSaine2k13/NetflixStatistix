@@ -220,7 +220,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="a12b1" class="javax.swing.JList" binding="watchedMoviesList">
+                  <component id="8c47e" class="javax.swing.JTable" binding="watchedMoviesList">
                     <constraints/>
                     <properties/>
                   </component>
@@ -241,7 +241,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="1c490" class="javax.swing.JList" binding="list1" default-binding="true">
+                  <component id="1c490" class="javax.swing.JList" binding="ListAccount">
                     <constraints/>
                     <properties/>
                   </component>

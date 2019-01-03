@@ -3,6 +3,7 @@ package actionListeners;
 import domain.AccountsList;
 import applicationlayer.FilmController;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import domain.Film;
@@ -10,10 +11,10 @@ import java.util.Set;
 
 public class SelectAccountBtnListener implements ActionListener {
 
-    private JList w;
+    private JTable w;
     private JList account;
 
-    public SelectAccountBtnListener(JList watchedMoviesList, JList a) {
+    public SelectAccountBtnListener(JTable watchedMoviesList, JList a) {
         w = watchedMoviesList;
         account = a;
     }
@@ -21,11 +22,19 @@ public class SelectAccountBtnListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String a = account.getSelectedValue().toString();
-        w.setModel(new DefaultListModel());
+        w.setModel(new DefaultTableModel( new Object [][] {
+
+        },
+                new String [] {
+                        "Titel"
+                }
+        ));
         Set<Film> Films = FilmController.getInstance().readWatchedFilmsForAccount(a);
-        DefaultListModel model = (DefaultListModel) w.getModel();
+        DefaultTableModel model = (DefaultTableModel) w.getModel();
+        Object rowData[] = new Object[1];
         for (Film f : Films) {
-            model.addElement(f.getTitle());
+            rowData[0] = f.getTitle();
+            model.addRow(rowData);
         }
     }
 }

@@ -32,7 +32,7 @@ public class MainForm extends JFrame {
     private JLabel amountOfCompletedViewersLbl;
     private JLabel kidMovieNameLbl;
     private JLabel kidMovieLengthLbl;
-    private JList watchedMoviesList;
+    private JTable watchedMoviesList;
     private JButton selectAccountButton;
     private JButton watchEpisodeBtn;
     private JButton createProfileBtn;
@@ -45,12 +45,13 @@ public class MainForm extends JFrame {
     private JTable profileTable;
     private JButton refreshBtn;
     private JTable singleProfileAccountsTable;
-    private JList list1;
+    private JList ListAccount;
     private JTable selectMovieTable;
     private JButton selectMovieBtn;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
+    private DefaultListModel listModel;
 
     /**
      * Main form setup, run on application start.
@@ -83,7 +84,7 @@ public class MainForm extends JFrame {
         deleteProfileBtn.addActionListener(new DeleteProfileBtnListener(profileTable));
         watchEpisodeBtn.addActionListener(new profileWatchlist(profileTable,"Serie"));
         watchMovieBtn.addActionListener(new profileWatchlist(profileTable, "Film"));
-        selectAccountButton.addActionListener(new SelectAccountBtnListener(watchedMoviesList,list1));
+        selectAccountButton.addActionListener(new SelectAccountBtnListener(watchedMoviesList,ListAccount));
 
         serieWatchLengthTab.addComponentListener(new ComponentAdapter() {
         });
@@ -226,6 +227,7 @@ public class MainForm extends JFrame {
      * Fills the table on the Account page with all the Accounts.
      */
     public void populateAccountTable(){
+        ListAccount.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         accountsTable.setModel(new DefaultTableModel(
                 new Object[][] {
 
@@ -240,6 +242,9 @@ public class MainForm extends JFrame {
         ));
 
         //get all accounts
+        ListAccount.setModel(new DefaultListModel());
+        DefaultListModel model2 = (DefaultListModel) ListAccount.getModel();
+        listModel = new DefaultListModel();
         Set<Account> accounts = AccountController.getInstance().readAllAccounts();
         DefaultTableModel model = (DefaultTableModel) accountsTable.getModel();
         Object rowData[] = new Object[5];
@@ -251,7 +256,9 @@ public class MainForm extends JFrame {
             rowData[3] = a.getHouseNumberAddition();
             rowData[4] = a.getResidence();
             model.addRow(rowData);
+            model2.addElement(a.getName());
         }
+
     }
     /**
      * Fills the table on the Profile page with all the Profiles.
