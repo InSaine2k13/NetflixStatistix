@@ -46,7 +46,12 @@ public class MainForm extends JFrame {
     private JButton refreshBtn;
     private JTable singleProfileAccountsTable;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private JList list1;
+=======
+    private JTable selectMovieTable;
+    private JButton selectMovieBtn;
+>>>>>>> 38ec72daaf8acad56dce0f3dcc93a20fe848884c
 =======
     private JTable selectMovieTable;
     private JButton selectMovieBtn;
