@@ -26,7 +26,6 @@ public class MainForm extends JFrame {
     private JPanel profilesTab;
     private JPanel serieWatchLengthTab;
     private JPanel serieWatchLengthAccountTab;
-    private JPanel watchedMoviesTab;
     private JPanel longestWatchedKidMovieTab;
     private JPanel singleProfileAccountsTab;
     private JPanel audienceRatingsTab;
@@ -35,7 +34,6 @@ public class MainForm extends JFrame {
     private JButton selectSerieButton;
     private JLabel kidMovieNameLbl;
     private JLabel kidMovieLengthLbl;
-    private JList watchedMoviesList;
     private JButton selectAccountButton;
     private JButton watchEpisodeBtn;
     private JButton createProfileBtn;
@@ -48,6 +46,7 @@ public class MainForm extends JFrame {
     private JTable profileTable;
     private JButton refreshBtn;
     private JTable singleProfileAccountsTable;
+    private JButton watchedMoviesListBtn;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
@@ -56,6 +55,10 @@ public class MainForm extends JFrame {
      * Main form setup, run on application start.
      */
     public MainForm(){
+        setupForm();
+    }
+
+    public void setupForm(){
         add(panel1);
 
         setTitle("Netflix Statistix");
@@ -81,10 +84,8 @@ public class MainForm extends JFrame {
         deleteProfileBtn.addActionListener(new DeleteProfileBtnListener(profileTable));
         watchEpisodeBtn.addActionListener(new profileWatchlist(profileTable,"Serie"));
         watchMovieBtn.addActionListener(new profileWatchlist(profileTable, "Film"));
-        selectAccountButton.addActionListener(new SelectAccountBtnListener());
 
-        serieWatchLengthTab.addComponentListener(new ComponentAdapter() {
-        });
+        serieWatchLengthTab.addComponentListener(new ComponentAdapter() {});
         refreshBtn.addActionListener(new RefreshAccountsBtnListener(accountsTable, this));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
