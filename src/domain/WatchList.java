@@ -28,8 +28,10 @@ public class WatchList extends JFrame {
         this.type= type;
         if (type.equals("Serie")) {
             episodesButton.setVisible(true);
+            episodeList.setVisible(true);
         } else {
             episodesButton.setVisible(false);
+            episodeList.setVisible(false);
         }
         this.AccountID=AccountID;
         episodesButton.setText("Kies serie");
