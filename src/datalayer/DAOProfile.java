@@ -209,12 +209,12 @@ public class DAOProfile {
 
 }
 
-    public void delete(String name) {
+    public void delete(String name, String AccountID) {
         Connection con = DAOConnection.getInstance().connect();
 
         try {
             Statement st = con.createStatement();
-            String SQL = "Delete FROM dbo.Profile WHERE Name = '" + name + "'";
+            String SQL = "Delete FROM dbo.Profile WHERE Name = '" + name + "' AND AccountID= '" + AccountID + "'";
             st.execute(SQL);
 
         } catch (
