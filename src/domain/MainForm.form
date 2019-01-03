@@ -27,7 +27,7 @@
               </vspacer>
             </children>
           </grid>
-          <grid id="1cdba" binding="accountsTab" layout-manager="GridLayoutManager" row-count="2" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="1cdba" binding="accountsTab" layout-manager="GridLayoutManager" row-count="2" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Accounts"/>
@@ -45,7 +45,7 @@
               </component>
               <scrollpane id="72847">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="6" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -82,18 +82,10 @@
               </component>
               <component id="686ff" class="javax.swing.JButton" binding="refreshBtn">
                 <constraints>
-                  <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Refresh"/>
-                </properties>
-              </component>
-              <component id="34f" class="javax.swing.JButton" binding="watchedMoviesListBtn">
-                <constraints>
                   <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Watched Movies"/>
+                  <text value="Refresh"/>
                 </properties>
               </component>
             </children>
@@ -209,6 +201,37 @@
                 </constraints>
                 <properties>
                   <text value="Kies serie en account"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="4627d" binding="watchedMoviesTab" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="Bekeken films"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <scrollpane id="51d56">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="a12b1" class="javax.swing.JList" binding="watchedMoviesList">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+              <component id="f52f7" class="javax.swing.JButton" binding="selectAccountButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Select account"/>
                 </properties>
               </component>
             </children>

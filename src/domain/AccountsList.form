@@ -15,7 +15,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="867ad" class="javax.swing.JTable" binding="accountsListTable">
+          <component id="63c4c" class="javax.swing.JList" binding="Accounts">
             <constraints/>
             <properties/>
           </component>
