@@ -229,11 +229,11 @@ public class DAOProfile {
         }
     }
 
-    public void newWatchedSerie(String Serie,String ID, String Episode, String Profile, String Language) {
+    public void newWatchedSerie(String Serie,String ID, String Episode, String Profile, String Language, String percentage) {
         Connection con = DAOConnection.getInstance().connect();
         try {
             Statement st = con.createStatement();
-            String SQL = "INSERT INTO WatchedPrograms(ProfileID, ProgramID, WatchedPercentage) VALUES ((SELECT ID FROM Profile WHERE [Name] = '" + Profile + "' AND AccountID='"+ ID +"'), (SELECT p.ID FROM Program p INNER JOIN Episode e ON p.ID=e.ProgramID INNER JOIN Serie s ON e.SerieTitle=s.Title WHERE SerieTitle = '" + Serie + "' AND p.Title = '" + Episode + "' AND s.[Language]='"+ Language +"'), 100 )";
+            String SQL = "INSERT INTO WatchedPrograms(ProfileID, ProgramID, WatchedPercentage) VALUES ((SELECT ID FROM Profile WHERE [Name] = '" + Profile + "' AND AccountID='"+ ID +"'), (SELECT p.ID FROM Program p INNER JOIN Episode e ON p.ID=e.ProgramID INNER JOIN Serie s ON e.SerieTitle=s.Title WHERE SerieTitle = '" + Serie + "' AND p.Title = '" + Episode + "' AND s.[Language]='"+ Language +"'), '"+ percentage +"' )";
             st.execute(SQL);
 
         } catch (
@@ -248,11 +248,11 @@ public class DAOProfile {
         }
     }
 
-    public void newWatchedFilm(String Film,String ID, String account, String Language) {
+    public void newWatchedFilm(String Film,String ID, String account, String Language, String percentage) {
         Connection con = DAOConnection.getInstance().connect();
                 try {
             Statement st = con.createStatement();
-            String SQL = "INSERT INTO WatchedPrograms(ProfileID, ProgramID, WatchedPercentage) VALUES ((SELECT ID FROM Profile WHERE [Name] = '" + account + "'AND AccountID='"+ ID +"'), (SELECT TOP(1) p.ID FROM Program p INNER JOIN Film f ON p.ID=f.ProgramID WHERE Title = '" + Film + "' AND f.Language='"+ Language +"'), 100 )";
+            String SQL = "INSERT INTO WatchedPrograms(ProfileID, ProgramID, WatchedPercentage) VALUES ((SELECT ID FROM Profile WHERE [Name] = '" + account + "'AND AccountID='"+ ID +"'), (SELECT TOP(1) p.ID FROM Program p INNER JOIN Film f ON p.ID=f.ProgramID WHERE Title = '" + Film + "' AND f.Language='"+ Language +"'), '"+ percentage +"' )";
             st.execute(SQL);
 
         } catch (
