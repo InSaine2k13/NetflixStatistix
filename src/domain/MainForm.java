@@ -62,7 +62,6 @@ public class MainForm extends JFrame {
         setSize(800,800);
 
         disableEditingTables();
-
         populateSerieTable();
         populateAccountSerieTable();
         populateSerieAccountTable();
@@ -268,10 +267,11 @@ public class MainForm extends JFrame {
         //get all profiles
         Set<Profile> profiles = ProfileController.getInstance().readAllProfiles();
         DefaultTableModel model = (DefaultTableModel) profileTable.getModel();
-        Object rowData [] = new Object[1];
+        Object rowData [] = new Object[2];
 
         for(Profile p : profiles){
             rowData[0] = p.getName();
+            rowData[1] = p.getAccount();
             model.addRow(rowData);
         }
     }

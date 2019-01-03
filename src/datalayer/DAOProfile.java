@@ -40,7 +40,8 @@ public class DAOProfile {
                 Profile p = new Profile(
                         rs.getString("Name"),
                         calendar,
-                        null
+                        null,
+                        rs.getInt("AccountID")
                 );
 
                 HashMap<Program, Integer> watchedPrograms = readWatchedPrograms(rs.getInt("ID"));
@@ -106,12 +107,12 @@ public class DAOProfile {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.WatchedPrograms WHERE ProfileID = " + profileID;
+            String SQL = "SELECT * FROM dbo.WatchedPrograms w INNER JOIN Program p ON w.ProgramID = p.ID WHERE ProfileID = " + profileID;
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
 
-                Program p = DAOProgram.getInstance().read(rs.getString("ProgramTitle"));
+                Program p = DAOProgram.getInstance().read(rs.getString("Title"));
                 int watchedPercentage = rs.getInt("WatchedPercentage");
             }
         } catch (
@@ -148,7 +149,8 @@ public class DAOProfile {
                 Profile pf = new Profile(
                         rs.getString("Name"),
                         null,
-                        null
+                        null,
+                        rs.getInt("AccountID")
                 );
                 profiles.add(pf);
             }
@@ -190,7 +192,7 @@ public class DAOProfile {
 
         try {
             Statement st = con.createStatement();
-                String SQL = "UPDATE Profile SET [Name] = '" + name + "' WHERE Profile.[Name] = '" + accountname + "' AND Profile.AccountID = '" + id + "'";
+            String SQL = "UPDATE Profile SET [Name] = '" + name + "' WHERE Profile.[Name] = '" + accountname + "' AND Profile.AccountID = '" + id + "'";
             st.execute(SQL);
 
         } catch (
@@ -202,10 +204,10 @@ public class DAOProfile {
             } catch (SQLException e) {
                 e.printStackTrace();
 
+            }
         }
-    }
 
-}
+    }
 
     public void delete(String name) {
         Connection con = DAOConnection.getInstance().connect();
@@ -227,25 +229,41 @@ public class DAOProfile {
         }
     }
 
-    public void newWatchedSerie(String Serie, String Episode, String Profile) {
+    public void newWatchedSerie(String Serie,String ID, String Episode, String Profile, String Language) {
         Connection con = DAOConnection.getInstance().connect();
-        System.out.println(Serie);
-        System.out.println(Episode);
-        System.out.println(Profile);
-//        try {
-//            Statement st = con.createStatement();
-//            String SQL = "INSERT INTO WatchedPrograms(ProfileID, ProgramTitle) VALUES ((SELECT ID FROM Profile WHERE [Name] = '"+Profile+"'), '" + Serie + "')";
-//            st.execute(SQL);
-//
-//        } catch (
-//                SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        try {
+            Statement st = con.createStatement();
+            String SQL = "INSERT INTO WatchedPrograms(ProfileID, ProgramID, WatchedPercentage) VALUES ((SELECT ID FROM Profile WHERE [Name] = '" + Profile + "' AND AccountID='"+ ID +"'), (SELECT p.ID FROM Program p INNER JOIN Episode e ON p.ID=e.ProgramID INNER JOIN Serie s ON e.SerieTitle=s.Title WHERE SerieTitle = '" + Serie + "' AND Title = '" + Episode + "' AND s.[Language]='"+ Language +"'), 100 )";
+            st.execute(SQL);
+
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void newWatchedFilm(String Film,String ID, String account, String Language) {
+        Connection con = DAOConnection.getInstance().connect();
+        try {
+            Statement st = con.createStatement();
+            String SQL = "INSERT INTO WatchedPrograms(ProfileID, ProgramID, WatchedPercentage) VALUES ((SELECT ID FROM Profile WHERE [Name] = '" + account + "'AND AccountID='"+ ID +"'), (SELECT TOP(1) p.ID FROM Program p INNER JOIN Film f ON p.ID=f.ProgramID WHERE Title = '" + Film + "' AND f.Language='"+ Language +"'), 100 )";
+            st.execute(SQL);
+
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

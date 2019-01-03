@@ -179,14 +179,6 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="24f9e" class="javax.swing.JTable" binding="serieAccountTable">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
               <component id="64721" class="javax.swing.JTable" binding="AccountSerieTable">
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -202,6 +194,14 @@
                 <properties>
                   <text value="Kies serie en account"/>
                 </properties>
+              </component>
+              <component id="24f9e" class="javax.swing.JTable" binding="serieAccountTable">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="50"/>
+                  </grid>
+                </constraints>
+                <properties/>
               </component>
             </children>
           </grid>
@@ -363,7 +363,7 @@
       <component id="b8d" class="javax.swing.JLabel">
         <constraints border-constraint="South"/>
         <properties>
-          <text value="Netflix Statistix | Informatica | 2018/2019 | 23IVK | Mohamed Hsaine, Robin Beljaars"/>
+          <text value="Netflix Statistix | Informatica | 2018/2019 | 23IVK, 23IVT | Mohamed Hsaine, Robin Beljaars"/>
         </properties>
       </component>
     </children>

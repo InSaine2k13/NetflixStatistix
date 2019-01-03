@@ -22,7 +22,7 @@ public class EditProfilBtnListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (profileTable.getSelectedRow() > -1) {
-            new Profile(profileTable.getValueAt(profileTable.getSelectedRow(), 0).toString(), null, null).setVisible(true);
+            new Profile(profileTable.getValueAt(profileTable.getSelectedRow(), 0).toString(), null, null, Integer.parseInt(id.getText())).setVisible(true);
         }
     }
 }

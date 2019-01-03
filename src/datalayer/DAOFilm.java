@@ -27,12 +27,12 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.Film f INNER JOIN dbo.Program p ON f.ProgramTitle = p.Title WHERE f.ProgramTitle = '"+ title.replace("'", "char(39)") + "'";
+            String SQL = "SELECT * FROM dbo.Film f INNER JOIN dbo.Program p ON f.ID = p.ID WHERE f.ProgramID IN (SELECT ID FROM Program p WHERE p.Title = '\"+ title +\"')";
             ResultSet rs = st.executeQuery(SQL);
 
             while(rs.next()) {
                 film = new Film(
-                        rs.getString("ProgramTitle"),
+                        rs.getString("Title"),
                         rs.getInt("Duration"),
                         rs.getString("Genre"),
                         rs.getString("Language"),
@@ -100,13 +100,13 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramTitle= Program.Title";
+            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramID= Program.ID";
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
 
                 Film s = new Film(
-                        rs.getString("ProgramTitle"),
+                        rs.getString("Title"),
                         rs.getInt("Duration"),
                         rs.getString("Genre"),
                         rs.getString("Language"),

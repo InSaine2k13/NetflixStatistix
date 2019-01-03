@@ -24,7 +24,7 @@ public class EpisodeController {
      * Gets all Episodes from the datasource
      * @return all episodes
      */
-    public Set<Episode> readAllEpisodes() {
-        return DAOEpisode.getInstance().readAll();
+    public Set<Episode> readAllEpisodes(String Serie) {
+        return DAOEpisode.getInstance().readAllEpisodesForSerie(Serie);
     }
 }

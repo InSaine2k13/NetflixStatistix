@@ -20,6 +20,7 @@ public class Profile extends JFrame{
     private Date dateOfBirth;
     private String AcountID;
     private String date;
+    private int Account;
 
     private HashMap<Program, Integer> watchedPrograms;
     private JPanel Labels;
@@ -33,12 +34,13 @@ public class Profile extends JFrame{
     private JPanel panel1;
     private JLabel AccountNameLbl;
 
-    public Profile(String name, Date dateOfBirth, HashMap<Program, Integer> watchedPrograms) {
+    public Profile(String name, Date dateOfBirth, HashMap<Program, Integer> watchedPrograms , int AccountName) {
         this.editing=true;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.watchedPrograms = watchedPrograms;
         userNameTxt.setEditable(false);
+        this.Account=AccountName;
         buildForm();
     }
 
@@ -106,5 +108,9 @@ public class Profile extends JFrame{
                 ", dateOfBirth=" + dateOfBirth +
                 ", watchedPrograms=" + watchedPrograms +
                 '}';
+    }
+
+    public int getAccount() {
+        return this.Account;
     }
 }
