@@ -107,12 +107,12 @@ public class DAOProfile {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.WatchedPrograms WHERE ProfileID = " + profileID;
+            String SQL = "SELECT * FROM dbo.WatchedPrograms w INNER JOIN Program p ON w.ProgramID=p.ID WHERE ProfileID = " + profileID;
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
 
-                Program p = DAOProgram.getInstance().read(rs.getString("ProgramTitle"));
+                Program p = DAOProgram.getInstance().read(rs.getString("Title"));
                 int watchedPercentage = rs.getInt("WatchedPercentage");
             }
         } catch (
