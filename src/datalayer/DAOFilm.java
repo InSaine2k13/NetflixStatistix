@@ -133,15 +133,7 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-<<<<<<< HEAD
-<<<<<<< HEAD
             String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramID= Program.ID";
-=======
-            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramId = Program.Id";
->>>>>>> 38ec72daaf8acad56dce0f3dcc93a20fe848884c
-=======
-            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramId = Program.Id";
->>>>>>> 38ec72daaf8acad56dce0f3dcc93a20fe848884c
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
