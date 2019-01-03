@@ -233,7 +233,7 @@ public class DAOProfile {
         Connection con = DAOConnection.getInstance().connect();
         try {
             Statement st = con.createStatement();
-            String SQL = "INSERT INTO WatchedPrograms(ProfileID, ProgramID, WatchedPercentage) VALUES ((SELECT ID FROM Profile WHERE [Name] = '" + Profile + "' AND AccountID='"+ ID +"'), (SELECT p.ID FROM Program p INNER JOIN Episode e ON p.ID=e.ProgramID INNER JOIN Serie s ON e.SerieTitle=s.Title WHERE SerieTitle = '" + Serie + "' AND Title = '" + Episode + "' AND s.[Language]='"+ Language +"'), 100 )";
+            String SQL = "INSERT INTO WatchedPrograms(ProfileID, ProgramID, WatchedPercentage) VALUES ((SELECT ID FROM Profile WHERE [Name] = '" + Profile + "' AND AccountID='"+ ID +"'), (SELECT p.ID FROM Program p INNER JOIN Episode e ON p.ID=e.ProgramID INNER JOIN Serie s ON e.SerieTitle=s.Title WHERE SerieTitle = '" + Serie + "' AND p.Title = '" + Episode + "' AND s.[Language]='"+ Language +"'), 100 )";
             st.execute(SQL);
 
         } catch (

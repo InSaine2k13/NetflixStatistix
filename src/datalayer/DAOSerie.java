@@ -119,7 +119,7 @@ public class DAOSerie {
             for(Episode e : serie.getEpisodes()) {
                 Statement st = con.createStatement();
                 String title =  e.getTitle();
-                String SQL = "SELECT WatchedPercentage FROM dbo.WatchedPrograms WHERE ProgramTitle = '" + title.replace("'", "char(39)") + "'";
+                String SQL = "SELECT WatchedPercentage FROM dbo.WatchedPrograms w INNER JOIN Program p ON w.ProgramID = p.ID WHERE Title = '" + title+ "'";
                 ResultSet rs = st.executeQuery(SQL);
 
                 int timesWatched = 0;
