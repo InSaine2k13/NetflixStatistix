@@ -29,9 +29,7 @@ public class MainForm extends JFrame {
     private JPanel longestWatchedKidMovieTab;
     private JPanel singleProfileAccountsTab;
     private JPanel audienceRatingsTab;
-    private JButton selectMovieButton;
     private JLabel amountOfCompletedViewersLbl;
-    private JButton selectSerieButton;
     private JLabel kidMovieNameLbl;
     private JLabel kidMovieLengthLbl;
     private JList watchedMoviesList;
@@ -47,6 +45,7 @@ public class MainForm extends JFrame {
     private JTable profileTable;
     private JButton refreshBtn;
     private JTable singleProfileAccountsTable;
+    private JTable selectMovieTable;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
@@ -69,6 +68,7 @@ public class MainForm extends JFrame {
         populateProfileTable();
         populateLongestDurationChildFilm();
         populateSingleProfileAccountsTable();
+        populateSelectMovieTable();
 
         selectSerieBtn.addActionListener(new SelectSerieBtnListener(serieTable, this, selectSerieBtn));
         kiesSerieEnAccountButton.addActionListener(new KiesSerieButtonListener(this, serieAccountTable, AccountSerieTable, kiesSerieEnAccountButton));
@@ -310,6 +310,34 @@ public class MainForm extends JFrame {
             model.addRow(rowData);
         }
     }
+
+    public void populateSelectMovieTable(){
+        selectMovieTable.setModel(new DefaultTableModel(
+                new Object[][] {
+
+                },
+                new String [] {
+                        "Titel",
+                        "Genre",
+                        "Taal",
+                        "Leeftijds indicatie"
+                }
+        ));
+
+        //get all accounts
+        Set<Film> films = FilmController.getInstance().readAllFilms();
+        DefaultTableModel model = (DefaultTableModel) selectMovieTable.getModel();
+        Object rowData[] = new Object[5];
+
+        for(Film f : films){
+            rowData[0] = f.getTitle();
+            rowData[1] = f.getGenre();
+            rowData[2] = f.getLanguage();
+            rowData[3] = f.getAgeIndication();
+            model.addRow(rowData);
+        }
+    }
+
 
     public void disableEditingTables(){
         serieTable.setDefaultEditor(Object.class, null);

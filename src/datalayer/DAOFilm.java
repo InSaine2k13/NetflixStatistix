@@ -100,13 +100,13 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramTitle= Program.Title";
+            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramId = Program.Id";
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
 
                 Film s = new Film(
-                        rs.getString("ProgramTitle"),
+                        rs.getString("Title"),
                         rs.getInt("Duration"),
                         rs.getString("Genre"),
                         rs.getString("Language"),
