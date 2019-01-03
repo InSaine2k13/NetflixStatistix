@@ -172,7 +172,7 @@ public class DAOSerie {
                 int totalWatchTime = 0;
 
                 for(int profileID : DAOProfile.getInstance().readAllProfileIDsForAccount(account)) {
-                    String SQL = "SELECT WatchedPercentage FROM dbo.WatchedPrograms w INNER JOIN Program p ON W.ProgramID = P.ID WHERE ProgramTitle = '" + title + "' AND ProfileID = " + profileID;
+                    String SQL = "SELECT WatchedPercentage FROM dbo.WatchedPrograms w INNER JOIN Program p ON W.ProgramID = P.ID WHERE Title = '" + title + "' AND ProfileID = " + profileID;
                     ResultSet rs = st.executeQuery(SQL);
 
                     while (rs.next()) {
