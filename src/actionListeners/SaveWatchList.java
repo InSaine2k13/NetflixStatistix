@@ -26,7 +26,7 @@ public class SaveWatchList implements ActionListener {
         if (type.equals("Serie")){
             DAOProfile.getInstance().newWatchedSerie(watchTable.getValueAt(watchTable.getSelectedRow(),0).toString(),AccountID , Episode.getValueAt(Episode.getSelectedRow(),0).toString(), account,watchTable.getValueAt(watchTable.getSelectedRow(),1).toString());
         } else if(type.equals("Film")){
-            DAOProfile.getInstance().newWatchedFilm(watchTable.getValueAt(watchTable.getSelectedRow(),0).toString(),AccountID, account,watchTable.getValueAt(watchTable.getSelectedRow(),1).toString());
+                        DAOProfile.getInstance().newWatchedFilm(watchTable.getValueAt(watchTable.getSelectedRow(),0).toString(),AccountID, account,watchTable.getValueAt(watchTable.getSelectedRow(),1).toString());
         }
     }
 }

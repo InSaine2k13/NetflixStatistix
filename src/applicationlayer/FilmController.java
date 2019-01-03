@@ -43,7 +43,8 @@ public class FilmController {
      * @param account
      * @return all watched films
      */
-    public Set<Film> readWatchedFilmsForAccount(Account account) {
-        throw new NotImplementedException();
+    public Set<Film> readWatchedFilmsForAccount(String account) {
+        return DAOFilm.getInstance().readAccount(account);
     }
+
 }

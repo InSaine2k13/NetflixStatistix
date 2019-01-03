@@ -18,6 +18,7 @@ public class DAOFilm {
 
     /**
      * Gets a film from the database with the given title
+     *
      * @param title
      * @return film
      */
@@ -27,10 +28,10 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.Film f INNER JOIN dbo.Program p ON f.ID = p.ID WHERE f.ProgramID IN (SELECT ID FROM Program p WHERE p.Title = '\"+ title +\"')";
+            String SQL = "SELECT * FROM dbo.Film f INNER JOIN dbo.Program p ON f.ID = p.ID WHERE f.ProgramID IN (SELECT ID FROM Program p WHERE p.Title = '" + title + "')";
             ResultSet rs = st.executeQuery(SQL);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 film = new Film(
                         rs.getString("Title"),
                         rs.getInt("Duration"),
@@ -38,6 +39,38 @@ public class DAOFilm {
                         rs.getString("Language"),
                         rs.getInt("AgeIndication")
                 );
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return film;
+    }
+
+    public Set<Film> readAccount(String Account) {
+        Set<Film> film = new HashSet<Film>();
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String SQL = "SELECT Title, Duration, Genre, Language, AgeIndication FROM dbo.Film f INNER JOIN Program p ON f.ProgramID = p.ID INNER JOIN WatchedPrograms w ON p.ID = w.ProgramID INNER JOIN Profile pr ON w.ProfileID = pr.ID INNER JOIN Account a ON pr.AccountID=a.ID WHERE a.[Name] ='" + Account + "'";
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                film.add( new Film(
+                        rs.getString("Title"),
+                        rs.getInt("Duration"),
+                        rs.getString("Genre"),
+                        rs.getString("Language"),
+                        rs.getInt("AgeIndication")
+                ));
             }
         } catch (
                 SQLException e) {
@@ -63,7 +96,7 @@ public class DAOFilm {
             String SQL = "SELECT Title,ProgramType,p.ID,Duration,f.AgeIndication, F.Genre, F.[Language] FROM Program p INNER JOIN Film f ON p.id = f.ProgramID WHERE ProgramType = 'Film' AND Duration = (SELECT MAX(Duration) From Program WHERE ID IN (SELECT ProgramID FROM Film WHERE AgeIndication < '16') )";
             ResultSet rs = st.executeQuery(SQL);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 film = new Film(
                         rs.getString("Title"),
                         rs.getInt("Duration"),
@@ -88,8 +121,8 @@ public class DAOFilm {
 
 
     public static DAOFilm getInstance() {
-        if(instance == null) {
-            instance =  new DAOFilm();
+        if (instance == null) {
+            instance = new DAOFilm();
         }
         return instance;
     }
@@ -112,7 +145,6 @@ public class DAOFilm {
                         rs.getString("Language"),
                         rs.getInt("AgeIndication")
                 );
-
 
 
                 Films.add(s);

@@ -48,6 +48,7 @@ public class MainForm extends JFrame {
     private JTable profileTable;
     private JButton refreshBtn;
     private JTable singleProfileAccountsTable;
+    private JList AccountsJList;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
@@ -76,11 +77,11 @@ public class MainForm extends JFrame {
         editAccountBtn.addActionListener(new EditAccountBtnListener(accountsTable));
         deleteAccountBtn.addActionListener(new DeleteAccountBtnListener(accountsTable));
         createProfileBtn.addActionListener(new AddProfileBtnListener(accountsTable));
-        newProfileBtn.addActionListener(new EditProfilBtnListener(profileTable, EditprofielNameTxt1, EditIDNR));
+        newProfileBtn.addActionListener(new EditProfilBtnListener(profileTable, EditIDNR));
         deleteProfileBtn.addActionListener(new DeleteProfileBtnListener(profileTable));
         watchEpisodeBtn.addActionListener(new profileWatchlist(profileTable,"Serie"));
         watchMovieBtn.addActionListener(new profileWatchlist(profileTable, "Film"));
-        selectAccountButton.addActionListener(new SelectAccountBtnListener());
+        selectAccountButton.addActionListener(new SelectAccountBtnListener(watchedMoviesList,AccountsJList));
 
         serieWatchLengthTab.addComponentListener(new ComponentAdapter() {
         });
@@ -180,12 +181,7 @@ public class MainForm extends JFrame {
         DefaultTableModel model = (DefaultTableModel) serieTable.getModel();
         Object rowData[] = new Object[3];
 
-        for(Map.Entry<Episode, Integer> entry : episodes.entrySet()) {
-            rowData[0] = entry.getKey().getEpisodeNr();
-            rowData[1] = entry.getKey().getTitle();
-            rowData[2] = entry.getValue() + "%";
-            model.addRow(rowData);
-        }
+        getEpisodes(episodes, model, rowData);
     }
 
     /**
@@ -211,13 +207,17 @@ public class MainForm extends JFrame {
         DefaultTableModel model = (DefaultTableModel) serieAccountTable.getModel();
         Object rowData[] = new Object[3];
 
+        getEpisodes(episodes, model, rowData);
+
+    }
+
+    private void getEpisodes(Map<Episode, Integer> episodes, DefaultTableModel model, Object[] rowData) {
         for(Map.Entry<Episode, Integer> entry : episodes.entrySet()) {
             rowData[0] = entry.getKey().getEpisodeNr();
             rowData[1] = entry.getKey().getTitle();
             rowData[2] = entry.getValue() + "%";
             model.addRow(rowData);
         }
-
     }
     /**
      * Fills the table on the Account page with all the Accounts.
@@ -235,12 +235,19 @@ public class MainForm extends JFrame {
                         "Woonplaats"
                 }
         ));
-
+        AccountsJList.setModel(new DefaultListModel());
         //get all accounts
         Set<Account> accounts = AccountController.getInstance().readAllAccounts();
         DefaultTableModel model = (DefaultTableModel) accountsTable.getModel();
         Object rowData[] = new Object[5];
+        DefaultListModel model2=(DefaultListModel) AccountsJList.getModel();
+        GetAccounts(accounts, model, rowData);
+        for (Account a : accounts){
+            model2.addElement(a.getName());
+        }
+    }
 
+    private void GetAccounts(Set<Account> accounts, DefaultTableModel model, Object[] rowData) {
         for(Account a : accounts){
             rowData[0] = a.getName();
             rowData[1] = a.getStreet();
@@ -250,6 +257,7 @@ public class MainForm extends JFrame {
             model.addRow(rowData);
         }
     }
+
     /**
      * Fills the table on the Profile page with all the Profiles.
      */
@@ -302,14 +310,7 @@ public class MainForm extends JFrame {
         Object rowData[] = new Object[5];
 
 
-        for(Account a : singleProfileAccounts){
-            rowData[0] = a.getName();
-            rowData[1] = a.getStreet();
-            rowData[2] = a.getHouseNumber();
-            rowData[3] = a.getHouseNumberAddition();
-            rowData[4] = a.getResidence();
-            model.addRow(rowData);
-        }
+        GetAccounts(singleProfileAccounts, model, rowData);
     }
 
     public void disableEditingTables(){
