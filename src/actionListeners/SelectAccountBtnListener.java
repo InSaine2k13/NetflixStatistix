@@ -20,8 +20,6 @@ public class SelectAccountBtnListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-<<<<<<< HEAD
         String a = account.getSelectedValue().toString();
         w.setModel(new DefaultListModel());
         Set<Film> Films = FilmController.getInstance().readWatchedFilmsForAccount(a);
@@ -29,11 +27,5 @@ public class SelectAccountBtnListener implements ActionListener {
         for (Film f : Films) {
             model.addElement(f.getTitle());
         }
-=======
-=======
->>>>>>> 38ec72daaf8acad56dce0f3dcc93a20fe848884c
-
-        new AccountsList().setVisible(true);
->>>>>>> 38ec72daaf8acad56dce0f3dcc93a20fe848884c
     }
 }
