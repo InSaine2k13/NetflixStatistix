@@ -7,7 +7,7 @@ public abstract class Program {
     String title;
     int duration;
 
-    public Program(String title, int duration) {
+    public Program( String title, int duration) {
         this.title = title;
         this.duration = duration;
     }

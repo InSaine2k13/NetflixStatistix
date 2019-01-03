@@ -1,7 +1,7 @@
 package domain;
 
 import actionListeners.SaveWatchList;
-import applicationlayer.AccountController;
+import actionListeners.selectserieforprofile;
 import applicationlayer.EpisodeController;
 import applicationlayer.FilmController;
 import applicationlayer.SerieController;
@@ -18,26 +18,29 @@ public class WatchList extends JFrame {
     private JButton episodesButton;
 
     private String type;
-    private String account;
+    private String Profile;
+    private String AccountID;
 
 
-    public WatchList(String type, String account) {
-        this.type = type;
-        this.account = account;
-        if (type.equals("Serie")){
+    public WatchList(String type, String Profile, String AccountID) {
+        this.Profile = Profile;
+        this.type= type;
+        if (type.equals("Serie")) {
             episodesButton.setVisible(true);
         }
+        this.AccountID=AccountID;
+        episodesButton.setText("Kies serie");
         BuildForm();
         populatefilmAndSerielist();
-        populateepisodeList();
     }
 
     private void BuildForm() {
         add(panelWatchlist);
-        setTitle("Profile");
+        setTitle("Watch");
         setSize(600, 600);
 
-        Save.addActionListener(new SaveWatchList(type, account,filmAndSerielist,episodeList));
+        Save.addActionListener(new SaveWatchList(type, Profile, filmAndSerielist, episodeList,AccountID));
+        episodesButton.addActionListener(new selectserieforprofile(episodeList,filmAndSerielist,this , episodesButton));
     }
 
     public void populatefilmAndSerielist() {
@@ -54,19 +57,21 @@ public class WatchList extends JFrame {
         if (type.equals("Serie")) {
             Set<Serie> series = SerieController.getInstance().readAllSeries();
             DefaultTableModel model = (DefaultTableModel) filmAndSerielist.getModel();
-            Object rowData[] = new Object[1];
+            Object rowData[] = new Object[2];
 
             for (Serie s : series) {
                 rowData[0] = s.getTitle();
+                rowData[1] = s.getLanguage();
                 model.addRow(rowData);
             }
         } else if (type.equals("Film")) {
             Set<Film> films = FilmController.getInstance().readAllFilms();
             DefaultTableModel model = (DefaultTableModel) filmAndSerielist.getModel();
-            Object rowData[] = new Object[1];
+            Object rowData[] = new Object[2];
 
             for (Film f : films) {
                 rowData[0] = f.getTitle();
+                rowData[1] = f.getLanguage();
                 model.addRow(rowData);
             }
         }
@@ -76,30 +81,38 @@ public class WatchList extends JFrame {
     public String toString() {
         return "WatchList{" +
                 "type='" + type + '\'' +
-                ", account='" + account +
+                ", account='" + Profile +
                 '}';
     }
 
-    public void populateepisodeList() {
-        if (type.equals("Serie")){
-        episodeList.setModel(new DefaultTableModel(
-                new Object[][]{
+    public void populateepisodeList(String serie) {
+        if (type.equals("Serie")) {
+            episodeList.setModel(new DefaultTableModel(
+                    new Object[][]{
 
-                },
-                new String[]{
-                        "Titel"
-                }
-        ));
+                    },
+                    new String[]{
+                            "Titel"
+                    }
+            ));
 
-        //get all series
-        Set<Episode> episodes = EpisodeController.getInstance().readAllEpisodes();
-        DefaultTableModel model = (DefaultTableModel) episodeList.getModel();
-        Object rowData[] = new Object[1];
+            //get all series
+            Set<Episode> episodes = EpisodeController.getInstance().readAllEpisodes(serie);
+            DefaultTableModel model = (DefaultTableModel) episodeList.getModel();
+            Object rowData[] = new Object[1];
 
-        for (Episode E : episodes) {
-            rowData[0] = E.getTitle();
-            model.addRow(rowData);
+            for (Episode E : episodes) {
+                rowData[0] = E.getTitle();
+                model.addRow(rowData);
+            }
+    }
+    }
+    public void populateEmptyEpisodeList() {
+        if (type.equals("Serie")) {
+            DefaultTableModel model = (DefaultTableModel) episodeList.getModel();
+            while (model.getRowCount() > 0) {
+                model.removeRow(0);
+            }
         }
-    }
-    }
+}
 }

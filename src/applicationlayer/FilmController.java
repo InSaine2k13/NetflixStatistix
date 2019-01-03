@@ -29,6 +29,9 @@ public class FilmController {
         return DAOFilm.getInstance().readAll();
     }
 
+    public Set<Film> readWatchedFilmsForAccount(String account) {
+        return DAOFilm.getInstance().readAccount(account);
+    }
     /**
      * gets the film that is watched to longest on average.
      * and the age indication is below 16 years
@@ -46,4 +49,7 @@ public class FilmController {
     public Set<Film> readWatchedFilmsForAccount(Account account) {
         throw new NotImplementedException();
     }
+
+    public int GetAmountWatchedByFilm(int filmId){ return DAOFilm.getInstance().GetAmountWatchedByFilm(filmId); }
+
 }

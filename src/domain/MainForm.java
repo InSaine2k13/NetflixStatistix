@@ -29,9 +29,7 @@ public class MainForm extends JFrame {
     private JPanel longestWatchedKidMovieTab;
     private JPanel singleProfileAccountsTab;
     private JPanel audienceRatingsTab;
-    private JButton selectMovieButton;
     private JLabel amountOfCompletedViewersLbl;
-    private JButton selectSerieButton;
     private JLabel kidMovieNameLbl;
     private JLabel kidMovieLengthLbl;
     private JList watchedMoviesList;
@@ -47,6 +45,12 @@ public class MainForm extends JFrame {
     private JTable profileTable;
     private JButton refreshBtn;
     private JTable singleProfileAccountsTable;
+<<<<<<< HEAD
+    private JList list1;
+=======
+    private JTable selectMovieTable;
+    private JButton selectMovieBtn;
+>>>>>>> 38ec72daaf8acad56dce0f3dcc93a20fe848884c
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
@@ -69,18 +73,20 @@ public class MainForm extends JFrame {
         populateProfileTable();
         populateLongestDurationChildFilm();
         populateSingleProfileAccountsTable();
+        populateSelectMovieTable();
 
+        selectMovieBtn.addActionListener(new SelectMovieBtnListener(this,selectMovieTable));
         selectSerieBtn.addActionListener(new SelectSerieBtnListener(serieTable, this, selectSerieBtn));
         kiesSerieEnAccountButton.addActionListener(new KiesSerieButtonListener(this, serieAccountTable, AccountSerieTable, kiesSerieEnAccountButton));
         newAccountBtn.addActionListener(new NewAccountBtnListener());
         editAccountBtn.addActionListener(new EditAccountBtnListener(accountsTable));
         deleteAccountBtn.addActionListener(new DeleteAccountBtnListener(accountsTable));
         createProfileBtn.addActionListener(new AddProfileBtnListener(accountsTable));
-        newProfileBtn.addActionListener(new EditProfilBtnListener(profileTable, EditprofielNameTxt1, EditIDNR));
+        newProfileBtn.addActionListener(new EditProfilBtnListener(profileTable, EditIDNR));
         deleteProfileBtn.addActionListener(new DeleteProfileBtnListener(profileTable));
         watchEpisodeBtn.addActionListener(new profileWatchlist(profileTable,"Serie"));
         watchMovieBtn.addActionListener(new profileWatchlist(profileTable, "Film"));
-        selectAccountButton.addActionListener(new SelectAccountBtnListener());
+        selectAccountButton.addActionListener(new SelectAccountBtnListener(watchedMoviesList,list1));
 
         serieWatchLengthTab.addComponentListener(new ComponentAdapter() {
         });
@@ -267,10 +273,11 @@ public class MainForm extends JFrame {
         //get all profiles
         Set<Profile> profiles = ProfileController.getInstance().readAllProfiles();
         DefaultTableModel model = (DefaultTableModel) profileTable.getModel();
-        Object rowData [] = new Object[1];
+        Object rowData [] = new Object[2];
 
         for(Profile p : profiles){
             rowData[0] = p.getName();
+            rowData[1] = p.getAccount();
             model.addRow(rowData);
         }
     }
@@ -310,6 +317,39 @@ public class MainForm extends JFrame {
             model.addRow(rowData);
         }
     }
+
+    public void populateSelectMovieTable(){
+        selectMovieTable.setModel(new DefaultTableModel(
+                new Object[][] {
+
+                },
+                new String [] {
+                        "Titel",
+                        "Genre",
+                        "Taal",
+                        "Leeftijds indicatie"
+                }
+        ));
+
+        //get all accounts
+        Set<Film> films = FilmController.getInstance().readAllFilms();
+        DefaultTableModel model = (DefaultTableModel) selectMovieTable.getModel();
+        Object rowData[] = new Object[5];
+
+        for(Film f : films){
+            rowData[0] = f.getTitle();
+            rowData[1] = f.getGenre();
+            rowData[2] = f.getLanguage();
+            rowData[3] = f.getAgeIndication();
+            model.addRow(rowData);
+        }
+    }
+
+    public void populateAmountOfWatchersLabel(int filmId){
+        int amountOfViewers = FilmController.getInstance().GetAmountWatchedByFilm(filmId);
+        amountOfCompletedViewersLbl.setText(Integer.toString(amountOfViewers));
+    }
+
 
     public void disableEditingTables(){
         serieTable.setDefaultEditor(Object.class, null);
