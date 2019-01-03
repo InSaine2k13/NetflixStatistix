@@ -169,12 +169,35 @@ public class DAOFilm {
         return Films;
     }
 
-    public int GetAmountWatchedByFilm(int filmId){
+    public int GetAmountWatchedFullyByFilm(int filmId){
         Connection con = DAOConnection.getInstance().connect();
 
         try {
             Statement st = con.createStatement();
             String SQL = "SELECT COUNT(*) as total FROM WatchedPrograms INNER JOIN Program ON WatchedPrograms.ProgramID = Program.ID INNER JOIN Film ON Program.ID = Film.ProgramID WHERE WatchedPercentage = '100' AND Film.Id = '"+ filmId +"'";
+            ResultSet rs = st.executeQuery(SQL);
+            if(rs.next()){
+                return rs.getInt("total");
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public int GetAmountWatchedByFilm(int filmId){
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String SQL = "SELECT COUNT(*) as total FROM WatchedPrograms INNER JOIN Program ON WatchedPrograms.ProgramID = Program.ID INNER JOIN Film ON Program.ID = Film.ProgramID WHERE WatchedPercentage > '0' AND Film.Id = '"+ filmId +"'";
             ResultSet rs = st.executeQuery(SQL);
             if(rs.next()){
                 return rs.getInt("total");

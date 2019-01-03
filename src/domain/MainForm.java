@@ -48,6 +48,8 @@ public class MainForm extends JFrame {
     private JList ListAccount;
     private JTable selectMovieTable;
     private JButton selectMovieBtn;
+    private JLabel percentageOfCompletedViewersLbl;
+    private JLabel amountOfViewersThatWatchedIt;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
@@ -351,8 +353,18 @@ public class MainForm extends JFrame {
     }
 
     public void populateAmountOfWatchersLabel(int filmId){
-        int amountOfViewers = FilmController.getInstance().GetAmountWatchedByFilm(filmId);
-        amountOfCompletedViewersLbl.setText(Integer.toString(amountOfViewers));
+        double amountOfFullyWatchedViewers = FilmController.getInstance().GetAmountWatchedFullyByFilm(filmId);
+        double amountOfWatchedViewers = FilmController.getInstance().GetAmountWatchedByFilm(filmId);
+        double percentageOfCompletedViewers = 0;
+        if(amountOfFullyWatchedViewers != 0){
+            percentageOfCompletedViewers =  ((amountOfFullyWatchedViewers  / amountOfWatchedViewers) * 100);
+        }
+
+
+        amountOfCompletedViewersLbl.setText(Double.toString(amountOfFullyWatchedViewers));
+        amountOfViewersThatWatchedIt.setText(Double.toString(amountOfWatchedViewers));
+        percentageOfCompletedViewersLbl.setText(Double.toString(Math.round(percentageOfCompletedViewers)) + "%");
+
     }
 
 

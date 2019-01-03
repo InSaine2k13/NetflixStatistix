@@ -50,6 +50,8 @@ public class FilmController {
         throw new NotImplementedException();
     }
 
+    public int GetAmountWatchedFullyByFilm(int filmId){ return DAOFilm.getInstance().GetAmountWatchedFullyByFilm(filmId); }
+
     public int GetAmountWatchedByFilm(int filmId){ return DAOFilm.getInstance().GetAmountWatchedByFilm(filmId); }
 
 }
