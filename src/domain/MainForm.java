@@ -46,6 +46,7 @@ public class MainForm extends JFrame {
     private JButton refreshBtn;
     private JTable singleProfileAccountsTable;
     private JTable selectMovieTable;
+    private JButton selectMovieBtn;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
@@ -70,6 +71,7 @@ public class MainForm extends JFrame {
         populateSingleProfileAccountsTable();
         populateSelectMovieTable();
 
+        selectMovieBtn.addActionListener(new SelectMovieBtnListener());
         selectSerieBtn.addActionListener(new SelectSerieBtnListener(serieTable, this, selectSerieBtn));
         kiesSerieEnAccountButton.addActionListener(new KiesSerieButtonListener(this, serieAccountTable, AccountSerieTable, kiesSerieEnAccountButton));
         newAccountBtn.addActionListener(new NewAccountBtnListener());
