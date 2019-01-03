@@ -321,6 +321,7 @@ public class MainForm extends JFrame {
 
                 },
                 new String [] {
+                        "ID",
                         "Titel",
                         "Genre",
                         "Taal",
@@ -334,10 +335,11 @@ public class MainForm extends JFrame {
         Object rowData[] = new Object[5];
 
         for(Film f : films){
-            rowData[0] = f.getTitle();
-            rowData[1] = f.getGenre();
-            rowData[2] = f.getLanguage();
-            rowData[3] = f.getAgeIndication();
+            rowData[0] = f.getId();
+            rowData[1] = f.getTitle();
+            rowData[2] = f.getGenre();
+            rowData[3] = f.getLanguage();
+            rowData[4] = f.getAgeIndication();
             model.addRow(rowData);
         }
     }

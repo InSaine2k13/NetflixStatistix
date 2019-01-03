@@ -32,6 +32,7 @@ public class DAOFilm {
 
             while(rs.next()) {
                 film = new Film(
+                        rs.getInt("ID"),
                         rs.getString("Title"),
                         rs.getInt("Duration"),
                         rs.getString("Genre"),
@@ -64,6 +65,7 @@ public class DAOFilm {
 
             while (rs.next()) {
                 film.add( new Film(
+                        rs.getInt("ID"),
                         rs.getString("Title"),
                         rs.getInt("Duration"),
                         rs.getString("Genre"),
@@ -98,6 +100,7 @@ public class DAOFilm {
 
             while(rs.next()) {
                 film = new Film(
+                        rs.getInt("ID"),
                         rs.getString("Title"),
                         rs.getInt("Duration"),
                         rs.getString("Genre"),
@@ -139,11 +142,13 @@ public class DAOFilm {
             while (rs.next()) {
 
                 Film s = new Film(
+                        rs.getInt("ID"),
                         rs.getString("Title"),
                         rs.getInt("Duration"),
                         rs.getString("Genre"),
                         rs.getString("Language"),
                         rs.getInt("AgeIndication")
+
                 );
 
 
@@ -171,7 +176,9 @@ public class DAOFilm {
             Statement st = con.createStatement();
             String SQL = "SELECT COUNT(*) As total FROM WatchedPrograms WHERE WatchedPercentage = '100' AND ProgramID = '" + filmId + "'";
             ResultSet rs = st.executeQuery(SQL);
-            return rs.getInt("total");
+            if(rs.next()){
+                return rs.getInt("total");
+            }
         } catch (
                 SQLException e) {
             e.printStackTrace();
