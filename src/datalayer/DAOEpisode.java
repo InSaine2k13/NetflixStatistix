@@ -28,7 +28,7 @@ public class DAOEpisode {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.Episode e INNER JOIN dbo.Program p ON e.ProgramTitle = p.Title WHERE e.ProgramTitle = '"+ title.replace("'", "char(39)") + "'";
+            String SQL = "SELECT * FROM dbo.Episode e INNER JOIN dbo.Program p ON e.ProgramID = p.ID WHERE e.ProgramID IN (SELECT ID FROM Program p WHERE p.Title = '"+ title +"')";
             ResultSet rs = st.executeQuery(SQL);
 
             while(rs.next()) {
@@ -64,7 +64,38 @@ public class DAOEpisode {
         try {
             Statement st = con.createStatement();
             String title = s.getTitle();
-            String SQL1 = "SELECT * FROM dbo.Episode e INNER JOIN dbo.Program p on p.ID = e.ProgramID WHERE SerieTitle = '" + title.replace("'", "char(39)") + "'";
+            String SQL1 = "SELECT * FROM dbo.Episode e INNER JOIN dbo.Program p on p.ID = e.ProgramID WHERE SerieTitle = '" + title + "'";
+            ResultSet rs = st.executeQuery(SQL1);
+
+            while (rs.next()) {
+                episodes.add(new Episode(
+                        rs.getString("Title"),
+                        rs.getInt("Duration"),
+                        rs.getInt("EpisodeNr")
+                ));
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return episodes;
+    }
+
+    public Set<Episode> readAllEpisodesForSerie(String s) {
+        HashSet<Episode> episodes = new HashSet<Episode>();
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String title = s;
+            String SQL1 = "SELECT * FROM dbo.Episode e INNER JOIN dbo.Program p on p.ID = e.ProgramID WHERE SerieTitle = '" + title + "'";
             ResultSet rs = st.executeQuery(SQL1);
 
             while (rs.next()) {

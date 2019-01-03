@@ -23,13 +23,13 @@ public class KiesSerieButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonText = kiesSerieEnAccountButton.getText();
-        if (serieAccountTable.getSelectedRow()>-1){
-        if(buttonText.equals("Terug")) {
+
+        if (buttonText.equals("Terug")) {
             //reset the table to original state.
             mainForm.populateSerieAccountTable();
             accountSerieTable.setEnabled(true);
             kiesSerieEnAccountButton.setText("Kies serie en account");
-        } else {
+        } else if (serieAccountTable.getSelectedRow() > -1) {
             int column = 0;
             //get selected row index in account table
             int row = serieAccountTable.getSelectedRow();
@@ -40,7 +40,7 @@ public class KiesSerieButtonListener implements ActionListener {
             //get value from first column of the selected row.
             String selctedSerie = accountSerieTable.getModel().getValueAt(serieRow, column).toString();
 
-            if(selctedSerie == null || selectedAccount == null || selctedSerie.isEmpty() || selectedAccount.isEmpty()) {
+            if (selctedSerie == null || selectedAccount == null || selctedSerie.isEmpty() || selectedAccount.isEmpty()) {
                 return;
             }
 
@@ -48,6 +48,5 @@ public class KiesSerieButtonListener implements ActionListener {
             mainForm.populateSerieAccountTableWithAverageWatchTimePerEpisode(selctedSerie, selectedAccount);
             kiesSerieEnAccountButton.setText("Terug");
         }
-    }
     }
 }

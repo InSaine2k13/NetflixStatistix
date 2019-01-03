@@ -27,12 +27,12 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.Film f INNER JOIN dbo.Program p ON f.ProgramTitle = p.Title WHERE f.ProgramTitle = '"+ title.replace("'", "char(39)") + "'";
+            String SQL = "SELECT * FROM dbo.Film f INNER JOIN dbo.Program p ON f.ID = p.ID WHERE f.ProgramID IN (SELECT ID FROM Program p WHERE p.Title = '" + title + "')";
             ResultSet rs = st.executeQuery(SQL);
 
             while(rs.next()) {
                 film = new Film(
-                        rs.getString("ProgramTitle"),
+                        rs.getString("Title"),
                         rs.getInt("Duration"),
                         rs.getString("Genre"),
                         rs.getString("Language"),
@@ -52,6 +52,39 @@ public class DAOFilm {
 
         return film;
     }
+
+    public Set<Film> readAccount(String Account) {
+        Set<Film> film = new HashSet<Film>();
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String SQL = "SELECT Title, Duration, Genre, Language, AgeIndication FROM dbo.Film f INNER JOIN Program p ON f.ProgramID = p.ID INNER JOIN WatchedPrograms w ON p.ID = w.ProgramID INNER JOIN Profile pr ON w.ProfileID = pr.ID INNER JOIN Account a ON pr.AccountID=a.ID WHERE a.[Name] ='" + Account + "'";
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                film.add( new Film(
+                        rs.getString("Title"),
+                        rs.getInt("Duration"),
+                        rs.getString("Genre"),
+                        rs.getString("Language"),
+                        rs.getInt("AgeIndication")
+                ));
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return film;
+    }
+
 
     // Reads the most watched child film from the database
     public Film readLongestDurationChildFilm() {
@@ -100,13 +133,17 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramTitle= Program.Title";
+<<<<<<< HEAD
+            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramID= Program.ID";
+=======
+            String SQL = "SELECT * FROM dbo.Film INNER JOIN dbo.Program ON Film.ProgramId = Program.Id";
+>>>>>>> 38ec72daaf8acad56dce0f3dcc93a20fe848884c
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
 
                 Film s = new Film(
-                        rs.getString("ProgramTitle"),
+                        rs.getString("Title"),
                         rs.getInt("Duration"),
                         rs.getString("Genre"),
                         rs.getString("Language"),
@@ -129,5 +166,26 @@ public class DAOFilm {
         }
 
         return Films;
+    }
+
+    public int GetAmountWatchedByFilm(int filmId){
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String SQL = "SELECT COUNT(*) As total FROM WatchedPrograms WHERE WatchedPercentage = '100' AND ProgramID = '" + filmId + "'";
+            ResultSet rs = st.executeQuery(SQL);
+            return rs.getInt("total");
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
     }
 }

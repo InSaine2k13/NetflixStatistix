@@ -19,7 +19,7 @@ public class profileWatchlist implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (profileTable.getSelectedRow()>-1){
-        new WatchList(type, profileTable.getValueAt(profileTable.getSelectedRow(),0).toString()).setVisible(true);
-    }
+            new WatchList(type, profileTable.getValueAt(profileTable.getSelectedRow(),0).toString(), profileTable.getValueAt(profileTable.getSelectedRow(),1).toString()).setVisible(true);
+        }
     }
 }
