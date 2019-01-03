@@ -1,16 +1,20 @@
 package domain;
 
 public class Film extends Program {
+    private int Id;
     private String genre;
     private String language;
     private int AgeIndication;
 
-    public Film(String title, int duration, String genre, String language, int ageIndication) {
+    public Film(int Id,String title, int duration, String genre, String language, int ageIndication) {
         super(title, duration);
+        this.Id = Id;
         this.genre = genre;
         this.language = language;
         AgeIndication = ageIndication;
     }
+
+    public int getId(){return Id;}
 
     public String getGenre() {
         return genre;
@@ -43,7 +47,8 @@ public class Film extends Program {
                 ", language='" + language + '\'' +
                 ", AgeIndication=" + AgeIndication +
                 ", title='" + title + '\'' +
-                ", duration=" + duration +
+                ", duration=" + duration + '\'' +
+                ", ID=" + Id +
                 '}';
     }
 }
