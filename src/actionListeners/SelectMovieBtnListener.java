@@ -1,5 +1,6 @@
 package actionListeners;
 
+import domain.MainForm;
 import domain.Profile;
 
 import javax.swing.*;
@@ -8,16 +9,18 @@ import java.awt.event.ActionListener;
 
 
 public class SelectMovieBtnListener implements ActionListener {
-private JTable selectMovieTable;
+    private MainForm mainForm;
+    private JTable selectMovieTable;
 
-    public SelectMovieBtnListener(JTable selectMovieTable){
+    public SelectMovieBtnListener(MainForm mainForm, JTable selectMovieTable){
+        this.mainForm = mainForm;
         this.selectMovieTable = selectMovieTable;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (selectMovieTable.getSelectedRow() > -1) {
-            //GetAmountWatchedByFilm(0); //selectMovieTable.getValueAt(selectMovieTable.getSelectedRow(), 0)
+            mainForm.populateAmountOfWatchersLabel(Integer.parseInt(selectMovieTable.getValueAt(selectMovieTable.getSelectedRow(), 0).toString()));
         }
     }
 }

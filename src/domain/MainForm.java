@@ -340,6 +340,11 @@ public class MainForm extends JFrame {
         }
     }
 
+    public void populateAmountOfWatchersLabel(int filmId){
+        int amountOfViewers = FilmController.getInstance().GetAmountWatchedByFilm(filmId);
+        amountOfCompletedViewersLbl.setText(Integer.toString(amountOfViewers));
+    }
+
 
     public void disableEditingTables(){
         serieTable.setDefaultEditor(Object.class, null);
