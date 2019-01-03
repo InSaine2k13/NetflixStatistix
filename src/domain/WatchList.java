@@ -55,6 +55,15 @@ public class WatchList extends JFrame {
 
         //get all series
         if (type.equals("Serie")) {
+            filmAndSerielist.setModel(new DefaultTableModel(
+                    new Object[][] {
+
+                    },
+                    new String [] {
+                            "Title",
+                            "Language"
+                    }
+            ));
             Set<Serie> series = SerieController.getInstance().readAllSeries();
             DefaultTableModel model = (DefaultTableModel) filmAndSerielist.getModel();
             Object rowData[] = new Object[2];
@@ -65,6 +74,15 @@ public class WatchList extends JFrame {
                 model.addRow(rowData);
             }
         } else if (type.equals("Film")) {
+            filmAndSerielist.setModel(new DefaultTableModel(
+                    new Object[][] {
+
+                    },
+                    new String [] {
+                            "Title",
+                            "Language"
+                    }
+            ));
             Set<Film> films = FilmController.getInstance().readAllFilms();
             DefaultTableModel model = (DefaultTableModel) filmAndSerielist.getModel();
             Object rowData[] = new Object[2];
