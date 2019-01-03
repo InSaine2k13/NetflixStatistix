@@ -174,7 +174,7 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT COUNT(*) As total FROM WatchedPrograms WHERE WatchedPercentage = '100' AND ProgramID = '" + filmId + "'";
+            String SQL = "SELECT COUNT(*) as total FROM WatchedPrograms INNER JOIN Program ON WatchedPrograms.ProgramID = Program.IDINNER JOIN Film ON Program.ID = Film.ProgramID WHERE WatchedPercentage = '100' AND Film.Id = '"+ filmId +"'";
             ResultSet rs = st.executeQuery(SQL);
             if(rs.next()){
                 return rs.getInt("total");
