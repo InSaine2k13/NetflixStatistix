@@ -16,6 +16,7 @@ public class WatchList extends JFrame {
     private JTable episodeList;
     private JButton Save;
     private JButton episodesButton;
+    private JSlider watchPercentage;
     private JTextField Watchpercentage;
 
     private String type;
