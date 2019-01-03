@@ -130,4 +130,25 @@ public class DAOFilm {
 
         return Films;
     }
+
+    public int GetAmountWatchedByFilm(int filmId){
+        Connection con = DAOConnection.getInstance().connect();
+
+        try {
+            Statement st = con.createStatement();
+            String SQL = "SELECT COUNT(*) As total FROM WatchedPrograms WHERE WatchedPercentage = '100' AND ProgramID = '" + filmId + "'";
+            ResultSet rs = st.executeQuery(SQL);
+            return rs.getInt("total");
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
 }

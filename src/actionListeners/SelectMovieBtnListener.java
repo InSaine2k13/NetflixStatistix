@@ -8,16 +8,16 @@ import java.awt.event.ActionListener;
 
 
 public class SelectMovieBtnListener implements ActionListener {
-private JTable accountTable;
+private JTable selectMovieTable;
 
-    public SelectMovieBtnListener(JTable accountsTable){
-        this.accountTable = accountsTable;
+    public SelectMovieBtnListener(JTable selectMovieTable){
+        this.selectMovieTable = selectMovieTable;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (accountTable.getSelectedRow() > -1) {
-            new Profile(accountTable).setVisible(true);
+        if (selectMovieTable.getSelectedRow() > -1) {
+            //GetAmountWatchedByFilm(0); //selectMovieTable.getValueAt(selectMovieTable.getSelectedRow(), 0)
         }
     }
 }

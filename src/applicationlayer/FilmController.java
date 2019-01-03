@@ -46,4 +46,7 @@ public class FilmController {
     public Set<Film> readWatchedFilmsForAccount(Account account) {
         throw new NotImplementedException();
     }
+
+    public int GetAmountWatchedByFilm(int filmId){ return DAOFilm.getInstance().GetAmountWatchedByFilm(filmId); }
+
 }

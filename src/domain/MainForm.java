@@ -71,7 +71,7 @@ public class MainForm extends JFrame {
         populateSingleProfileAccountsTable();
         populateSelectMovieTable();
 
-        selectMovieBtn.addActionListener(new SelectMovieBtnListener());
+        selectMovieBtn.addActionListener(new SelectMovieBtnListener(selectMovieTable));
         selectSerieBtn.addActionListener(new SelectSerieBtnListener(serieTable, this, selectSerieBtn));
         kiesSerieEnAccountButton.addActionListener(new KiesSerieButtonListener(this, serieAccountTable, AccountSerieTable, kiesSerieEnAccountButton));
         newAccountBtn.addActionListener(new NewAccountBtnListener());
