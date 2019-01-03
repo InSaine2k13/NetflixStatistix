@@ -363,5 +363,6 @@ public class MainForm extends JFrame {
         serieAccountTable.setDefaultEditor(Object.class, null);
         AccountSerieTable.setDefaultEditor(Object.class, null);
         singleProfileAccountsTable.setDefaultEditor(Object.class, null);
+        watchedMoviesList.setDefaultEditor(Object.class, null);
     }
 }
