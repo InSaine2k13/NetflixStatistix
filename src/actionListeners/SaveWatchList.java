@@ -12,9 +12,9 @@ public class SaveWatchList implements ActionListener {
     private JTable Episode;
     private String account;
     private String AccountID;
-    private JTextField percentage;
+    private JSlider percentage;
 
-    public SaveWatchList(String type, String account, JTable watchTable, JTable episode, String AccountID, JTextField Percentage) {
+    public SaveWatchList(String type, String account, JTable watchTable, JTable episode, String AccountID, JSlider Percentage) {
         this.type = type;
         this.watchTable = watchTable;
         Episode = episode;
@@ -25,7 +25,7 @@ public class SaveWatchList implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String percentageInText = percentage.getText();
+        String percentageInText = Integer.toString(percentage.getValue());
         if (type.equals("Serie")){
             DAOProfile.getInstance().newWatchedSerie(watchTable.getValueAt(watchTable.getSelectedRow(),0).toString(),AccountID , Episode.getValueAt(Episode.getSelectedRow(),0).toString(), account,watchTable.getValueAt(watchTable.getSelectedRow(),1).toString(), percentageInText);
         } else if(type.equals("Film")){

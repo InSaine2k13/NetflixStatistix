@@ -17,7 +17,6 @@ public class WatchList extends JFrame {
     private JButton Save;
     private JButton episodesButton;
     private JSlider watchPercentage;
-    private JTextField Watchpercentage;
 
     private String type;
     private String Profile;
@@ -43,7 +42,7 @@ public class WatchList extends JFrame {
         setTitle("Watch");
         setSize(600, 600);
 
-        Save.addActionListener(new SaveWatchList(type, Profile, filmAndSerielist, episodeList,AccountID, Watchpercentage));
+        Save.addActionListener(new SaveWatchList(type, Profile, filmAndSerielist, episodeList,AccountID, watchPercentage));
         episodesButton.addActionListener(new selectserieforprofile(episodeList,filmAndSerielist,this , episodesButton));
     }
 
