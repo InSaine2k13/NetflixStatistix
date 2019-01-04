@@ -17,6 +17,10 @@ public class SelectMovieBtnListener implements ActionListener {
         this.selectMovieTable = selectMovieTable;
     }
 
+    /**
+     * the actionListiner responsible for getting the film Id for the function populateAmountOfWatchersLabel(int FilmID)
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (selectMovieTable.getSelectedRow() > -1) {

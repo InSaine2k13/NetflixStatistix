@@ -29,7 +29,7 @@ public class Account extends JFrame{
     private JTextField cityTxt;
 
     /**
-     * Default constructor used when called by New button.
+     * Default constructor used when called by New Account button.
      */
     public Account()
     {
@@ -55,6 +55,7 @@ public class Account extends JFrame{
         buildForm();
     }
 
+    //method responsible for the pop-up window for editing and adding Accounts
     public void buildForm(){
         add(panel1);
 
@@ -70,50 +71,62 @@ public class Account extends JFrame{
         saveButton.addActionListener(new SaveAccountBtnListener(editing, usernameTxt, streetTxt, houseNumberTxt, houseNumberAdditionTxt,cityTxt));
     }
 
+    //Method to get the Name of the account from another class
     public String getName() {
         return name;
     }
 
+    //Method to Set the account name if it is not already set when the New Account is called if needed
     public void setName(String name) {
         this.name = name;
     }
 
+    //Method to get the Street from the account from another class
     public String getStreet() {
         return street;
     }
 
+    //Method to Set the street if it is not already set when the New Account is called when needed
     public void setStreet(String street) {
         this.street = street;
     }
 
+    //Method to get the Housenumber of the account from another class
     public String getHouseNumber() {
         return houseNumber;
     }
 
+    //Method to Set the Housenumber if it is not already set when the New Account is called when needed
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 
+    //Get the HouseNumberAddition from another class
     public String getHouseNumberAddition() {
         return houseNumberAddition;
     }
 
+    // change the HouseNumberAddition in the class
     public void setHouseNumberAddition(String houseNumberAddition) {
         this.houseNumberAddition = houseNumberAddition;
     }
 
+    //Get the Residence of this account.
     public String getResidence() {
         return residence;
     }
 
+    //Set the Residence of this account.
     public void setResidence(String residence) {
         this.residence = residence;
     }
 
+    //Get all the profiles from this account
     public ArrayList<Profile> getProfiles() {
         return profiles;
     }
 
+    //Add profiles to this class
     public void setProfiles(ArrayList<Profile> profiles) {
         this.profiles = profiles;
     }
