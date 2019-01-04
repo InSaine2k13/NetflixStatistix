@@ -50,6 +50,10 @@ public class MainForm extends JFrame {
     private JButton selectMovieBtn;
     private JLabel percentageOfCompletedViewersLbl;
     private JLabel amountOfViewersThatWatchedIt;
+    private JPanel AvaragewatchtimeforthewholeSerie;
+    private JTable AVGSerieTable;
+    private JButton LoadAVGPercentage;
+    private JLabel AvgLabelSerie;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
@@ -87,7 +91,7 @@ public class MainForm extends JFrame {
         watchEpisodeBtn.addActionListener(new profileWatchlist(profileTable,"Serie"));
         watchMovieBtn.addActionListener(new profileWatchlist(profileTable, "Film"));
         selectAccountButton.addActionListener(new SelectAccountBtnListener(watchedMoviesList,ListAccount));
-
+        LoadAVGPercentage.addActionListener(new AvgPercentageBtnListener(AVGSerieTable, AvgLabelSerie));
         serieWatchLengthTab.addComponentListener(new ComponentAdapter() {});
         refreshBtn.addActionListener(new RefreshAccountsBtnListener(accountsTable, this));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -145,6 +149,14 @@ public class MainForm extends JFrame {
      * Fills the table on the Serie kijksduur page with all series.
      */
     public void populateSerieTable() {
+        AVGSerieTable.setModel(new DefaultTableModel(
+                new Object [][] {
+
+                },
+                new String [] {
+                        "Titel"
+                }
+        ));
         serieTable.setModel(new DefaultTableModel(
                 new Object [][] {
 
@@ -157,11 +169,13 @@ public class MainForm extends JFrame {
         //get all series
         Set<Serie> series = SerieController.getInstance().readAllSeries();
         DefaultTableModel model = (DefaultTableModel) serieTable.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) AVGSerieTable.getModel();
         Object rowData[] = new Object[1];
 
         for(Serie s : series) {
             rowData[0] = s.getTitle();
             model.addRow(rowData);
+            model2.addRow(rowData);
         }
     }
     /**
@@ -287,12 +301,19 @@ public class MainForm extends JFrame {
         }
     }
 
+    /**
+     * Fills the table on the longest watched childmovie page with the longest child movie.
+     */
     public void populateLongestDurationChildFilm(){
         Film longestDurationChildFilm = FilmController.getInstance().readLongestDurationChildrenFilm();
         kidMovieNameLbl.setText(longestDurationChildFilm.title);
         kidMovieLengthLbl.setText(Integer.toString(longestDurationChildFilm.duration));
     }
 
+
+    /**
+     * Fills the table on the one profile accounts page with the all accounts having one profile.
+     */
     public void populateSingleProfileAccountsTable(){
         singleProfileAccountsTable.setModel(new DefaultTableModel(
                 new Object[][] {
@@ -323,6 +344,9 @@ public class MainForm extends JFrame {
         }
     }
 
+    /**
+     * Fills the table on the ratings page with all the movies.
+     */
     public void populateSelectMovieTable(){
         selectMovieTable.setModel(new DefaultTableModel(
                 new Object[][] {
@@ -352,6 +376,9 @@ public class MainForm extends JFrame {
         }
     }
 
+    /**
+     * Fills the table on the ratings page with the watchers data for a selected movie.
+     */
     public void populateAmountOfWatchersLabel(int filmId){
         double amountOfFullyWatchedViewers = FilmController.getInstance().GetAmountWatchedFullyByFilm(filmId);
         double amountOfWatchedViewers = FilmController.getInstance().GetAmountWatchedByFilm(filmId);
@@ -368,6 +395,9 @@ public class MainForm extends JFrame {
     }
 
 
+    /**
+     * code responsible for disabling of the "Fake" Editing in the tables
+     */
     public void disableEditingTables(){
         serieTable.setDefaultEditor(Object.class, null);
         profileTable.setDefaultEditor(Object.class, null);
