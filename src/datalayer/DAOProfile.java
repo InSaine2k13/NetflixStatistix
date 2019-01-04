@@ -187,12 +187,12 @@ public class DAOProfile {
         }
     }
 
-    public void saveProfile(String accountname, String name, String id) {
+    public void saveProfile(String accountname, String Date, String id) {
         Connection con = DAOConnection.getInstance().connect();
 
         try {
             Statement st = con.createStatement();
-            String SQL = "UPDATE Profile SET [Name] = '" + name + "' WHERE Profile.[Name] = '" + accountname + "' AND Profile.AccountID = '" + id + "'";
+            String SQL = "UPDATE Profile SET Profile.[DateOfBirth] = CAST('" + Date + "' AS DATE) WHERE Profile.[Name] = '" + accountname + "' AND Profile.AccountID = (SELECT a.ID FROM Account a WHERE a.[Name]='" + id + "')";
             st.execute(SQL);
 
         } catch (

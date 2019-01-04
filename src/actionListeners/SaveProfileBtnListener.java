@@ -11,15 +11,15 @@ public class SaveProfileBtnListener implements ActionListener {
     private String sname;
     private boolean editing = false;
     private JTextField name;
-    private String Date;
+    private JTextField Date;
     private JTextField AccountName;
     private String ID;
 
     public SaveProfileBtnListener(boolean editing, JTextField name, JTextField date, JTextField accountsTable) {
         this.editing = editing;
         this.name = name;
-        Date = date.getText();
         AccountName = accountsTable;
+        Date=date;
 
     }
 
@@ -28,16 +28,17 @@ public class SaveProfileBtnListener implements ActionListener {
         this.sname= name;
         this.saccountname=change;
         this.ID=AcID;
-        DAOProfile.getInstance().saveProfile(sname, saccountname, ID);
+
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String date = Date.getText();
         if (editing) {
-
+            DAOProfile.getInstance().saveProfile(name.getText(), date,  AccountName.getText());
         } else {
-            DAOProfile.getInstance().newProfile(Date, AccountName.getText(), name.getText());
+            DAOProfile.getInstance().newProfile(date, AccountName.getText(), name.getText());
         }
     }
 }
