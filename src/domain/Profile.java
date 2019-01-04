@@ -41,6 +41,7 @@ public class Profile extends JFrame{
         this.watchedPrograms = watchedPrograms;
         this.Account=AccountName;
         userNameTxt.setEditable(false);
+        AccountName1.setEditable(false);
         buildForm();
     }
 
@@ -52,9 +53,6 @@ public class Profile extends JFrame{
         buildForm();
     }
 
-    public void Edit(Profile p, String name, String ID){
-        new SaveProfileBtnListener(true, p.name, name, ID);
-    }
 
     public void buildForm(){
         add(panel1);
@@ -63,7 +61,11 @@ public class Profile extends JFrame{
         setSize(600,600);
         userNameTxt.setText(name);
         firstNameTxt.setText(date);
-        AccountName1.setText(AcountID);
+        if (editing){
+            AccountName1.setText(""+Account);
+        }else if (!editing) {
+            AccountName1.setText(AcountID);
+        }
 
         saveButton.addActionListener(new SaveProfileBtnListener(editing, userNameTxt,firstNameTxt,AccountName1));
     }

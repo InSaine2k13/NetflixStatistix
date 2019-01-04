@@ -13,21 +13,12 @@ public class SaveProfileBtnListener implements ActionListener {
     private JTextField name;
     private JTextField Date;
     private JTextField AccountName;
-    private String ID;
 
     public SaveProfileBtnListener(boolean editing, JTextField name, JTextField date, JTextField accountsTable) {
         this.editing = editing;
         this.name = name;
         AccountName = accountsTable;
         Date=date;
-
-    }
-
-    public SaveProfileBtnListener(boolean b, String name, String change, String AcID) {
-        this.editing=b;
-        this.sname= name;
-        this.saccountname=change;
-        this.ID=AcID;
 
     }
 

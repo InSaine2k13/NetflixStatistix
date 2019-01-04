@@ -278,7 +278,7 @@ public class MainForm extends JFrame {
         //get all profiles
         Set<Profile> profiles = ProfileController.getInstance().readAllProfiles();
         DefaultTableModel model = (DefaultTableModel) profileTable.getModel();
-        Object rowData [] = new Object[2];
+        Object rowData [] = new Object[3];
 
         for(Profile p : profiles){
             rowData[0] = p.getName();

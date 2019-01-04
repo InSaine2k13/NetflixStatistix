@@ -192,7 +192,7 @@ public class DAOProfile {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "UPDATE Profile SET Profile.[DateOfBirth] = CAST('" + Date + "' AS DATE) WHERE Profile.[Name] = '" + accountname + "' AND Profile.AccountID = (SELECT a.ID FROM Account a WHERE a.[Name]='" + id + "')";
+            String SQL = "UPDATE Profile SET Profile.[DateOfBirth] = CAST('" + Date + "' AS DATE) WHERE Profile.[Name] = '" + accountname + "' AND Profile.AccountID = '" + id + "'";
             st.execute(SQL);
 
         } catch (
