@@ -21,7 +21,7 @@ public class DeleteAccountBtnListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (accountsTable.getSelectedRow() > -1) {
-            DAOAccount.getInstance().delete((accountsTable.getValueAt(accountsTable.getSelectedRow(), accountsTable.getSelectedColumn())).toString());
+            DAOAccount.getInstance().delete((accountsTable.getValueAt(accountsTable.getSelectedRow(), 1)).toString());
             mainForm.populateAccountTable();
         }
     }
