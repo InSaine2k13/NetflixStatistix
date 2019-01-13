@@ -64,7 +64,8 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT f.ID AS FilmID, Title, Duration, Genre, Language, AgeIndication FROM dbo.Film f INNER JOIN Program p ON f.ProgramID = p.ID INNER JOIN WatchedPrograms w ON p.ID = w.ProgramID INNER JOIN Profile pr ON w.ProfileID = pr.ID INNER JOIN Account a ON pr.AccountID=a.ID WHERE a.[Name] ='" + Account + "'";
+            String SQL = "SELECT f.ID AS FilmID, Title, Duration, Genre, Language, AgeIndication , COUNT(*)FROM dbo.Film f INNER JOIN Program p ON f.ProgramID = p.ID INNER JOIN WatchedPrograms w ON p.ID = w.ProgramID INNER JOIN Profile pr ON w.ProfileID = pr.ID INNER JOIN Account a ON pr.AccountID=a.ID WHERE a.[Name] ='" + Account + "' GROUP BY  f.ID , Title, Duration, Genre, Language, AgeIndication HAVING Count(*) > 1";
+            //String SQL = "SELECT f.ID AS FilmID, Title, Duration, Genre, Language, AgeIndication FROM dbo.Film f INNER JOIN Program p ON f.ProgramID = p.ID INNER JOIN WatchedPrograms w ON p.ID = w.ProgramID INNER JOIN Profile pr ON w.ProfileID = pr.ID INNER JOIN Account a ON pr.AccountID=a.ID WHERE a.[Name] ='" + Account + "'";
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
