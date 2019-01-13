@@ -1,7 +1,7 @@
 package domain;
 
 import javax.swing.*;
-
+//not used because of WatchList
 public class SerieList extends JFrame{
     private JList list1;
     private JPanel panel1;

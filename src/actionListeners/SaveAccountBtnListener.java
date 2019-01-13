@@ -28,6 +28,7 @@ public class SaveAccountBtnListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //make it possible to save the Account in the database
         if ((houseNumberAddition.getText()).length() > 1) {
             JOptionPane.showMessageDialog(null, "House number addition can only be one character max.", "House number addition", JOptionPane.INFORMATION_MESSAGE);
         }else{

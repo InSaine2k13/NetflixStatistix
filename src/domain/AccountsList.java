@@ -11,7 +11,7 @@ public class AccountsList extends JFrame {
     private JButton selectBtn;
     private JTable table1;
     private JTable Accounts;
-
+//not used in end product
     public AccountsList(){
 
         fillAccounts();

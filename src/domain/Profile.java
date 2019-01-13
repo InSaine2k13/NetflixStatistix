@@ -53,7 +53,7 @@ public class Profile extends JFrame{
         buildForm();
     }
 
-
+//code witch opens a new window to edit or create the profile
     public void buildForm(){
         add(panel1);
 
@@ -89,11 +89,11 @@ public class Profile extends JFrame{
     public HashMap<Program, Integer> getWatchedPrograms() {
         return watchedPrograms;
     }
-
+// adds a watch programs list to this object (new profile())
     public void setWatchedPrograms(HashMap<Program, Integer> watchedPrograms) {
         this.watchedPrograms = watchedPrograms;
     }
-
+//get te account of this object
     public int getAccount() {
         return this.Account;
     }
@@ -101,6 +101,7 @@ public class Profile extends JFrame{
      * adds the program and the time watched to the watchedPrograms map
      * @param program
      * @param timeWatched
+     * not used in the end
      */
     public void watch(Program program, int timeWatched) {
         watchedPrograms.put(program, timeWatched);

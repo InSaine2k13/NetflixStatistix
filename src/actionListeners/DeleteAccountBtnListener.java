@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 public class DeleteAccountBtnListener implements ActionListener {
     private MainForm mainForm;
     private JTable accountsTable;
-
+// removes the selected account from the database
     public DeleteAccountBtnListener(MainForm mainForm,JTable accountsTable) {
         this.mainForm = mainForm;
         this.accountsTable = accountsTable;

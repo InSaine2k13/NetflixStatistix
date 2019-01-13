@@ -21,6 +21,7 @@ public class AvgPercentageBtnListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //loads the average watch time for the whole Serie
         Serie serie = SerieController.getInstance().readSerie(CalcAVGSerie.getValueAt(CalcAVGSerie.getSelectedRow(),0).toString());
         Map<Episode, Integer> episodes = SerieController.getInstance().readAverageWatchTime(serie);
         int percentage=0;

@@ -1,7 +1,7 @@
 package domain;
 
 import javax.swing.*;
-
+//not used
 public class EpisodeList extends JFrame {
     private JList list1;
     private JPanel panel1;

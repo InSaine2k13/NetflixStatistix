@@ -128,14 +128,14 @@ public class DAOProfile {
 
         return watchedPrograms;
     }
-
+// makes the class accesible to the other classes
     public static DAOProfile getInstance() {
         if (instance == null) {
             instance = new DAOProfile();
         }
         return instance;
     }
-
+    // get all the profiles in the database
     public Set<Profile> readAll() {
         Set<Profile> profiles = new HashSet<>();
         Connection con = DAOConnection.getInstance().connect();
@@ -167,6 +167,7 @@ public class DAOProfile {
         return profiles;
     }
 
+    // adds a new profile to the database
     public void newProfile(String DateOfBirth, String AcountID, String ProfileName) {
         Connection con = DAOConnection.getInstance().connect();
 
@@ -186,7 +187,7 @@ public class DAOProfile {
             }
         }
     }
-
+// edit a profile in the database
     public void saveProfile(String accountname, String Date, String id) {
         Connection con = DAOConnection.getInstance().connect();
 
@@ -208,7 +209,7 @@ public class DAOProfile {
     }
 
 }
-
+//removes a profile from the database
     public void delete(String name, String AccountID) {
         Connection con = DAOConnection.getInstance().connect();
 
@@ -229,6 +230,7 @@ public class DAOProfile {
         }
     }
 
+    //saves a episode of a serie in the watched database when watched by a profile
     public void newWatchedSerie(String Serie,String ID, String Episode, String Profile, String Language, String percentage) {
         Connection con = DAOConnection.getInstance().connect();
         try {
@@ -247,7 +249,7 @@ public class DAOProfile {
             }
         }
     }
-
+    //saves a Film in the watched database when watched by a profile
     public void newWatchedFilm(String Film,String ID, String account, String Language, String percentage) {
         Connection con = DAOConnection.getInstance().connect();
                 try {

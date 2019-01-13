@@ -19,7 +19,7 @@ public class selectserieforprofile implements ActionListener {
         this.selectSerieBtn = selectSerieBtn;
         this.seriekeuze = seriekeuze;
     }
-
+    //get all watched Series from the selected profile
     @Override
     public void actionPerformed(ActionEvent e) {
         //checks text of button

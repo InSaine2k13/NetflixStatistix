@@ -20,7 +20,7 @@ public class SelectSerieBtnListener implements ActionListener {
         this.mainForm = mainForm;
         this.selectSerieBtn = selectSerieBtn;
     }
-
+    //get all watched Series from the selected account
     @Override
     public void actionPerformed(ActionEvent e) {
         //checks text of button

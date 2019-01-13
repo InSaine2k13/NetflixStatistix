@@ -23,7 +23,7 @@ public class KiesSerieButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonText = kiesSerieEnAccountButton.getText();
-
+// shows information about the selected Serie watched by the selected account
         if (buttonText.equals("Terug")) {
             //reset the table to original state.
             mainForm.populateSerieAccountTable();

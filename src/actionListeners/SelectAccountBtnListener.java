@@ -21,6 +21,7 @@ public class SelectAccountBtnListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //get all watched films from the selected account
         String a = account.getSelectedValue().toString();
         w.setModel(new DefaultTableModel( new Object [][] {
 

@@ -25,6 +25,7 @@ public class SaveWatchList implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //make it possible to save the watchedprogram in the database
         String percentageInText = Integer.toString(percentage.getValue());
         if (type.equals("Serie")){
             DAOProfile.getInstance().newWatchedSerie(watchTable.getValueAt(watchTable.getSelectedRow(),0).toString(),AccountID , Episode.getValueAt(Episode.getSelectedRow(),0).toString(), account,watchTable.getValueAt(watchTable.getSelectedRow(),1).toString(), percentageInText);

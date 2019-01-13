@@ -88,6 +88,7 @@ public class DAOEpisode {
         return episodes;
     }
 
+    // gives a list of all the episodes in a serie
     public Set<Episode> readAllEpisodesForSerie(String s) {
         HashSet<Episode> episodes = new HashSet<Episode>();
         Connection con = DAOConnection.getInstance().connect();
@@ -126,6 +127,7 @@ public class DAOEpisode {
         return instance;
     }
 
+    //get all episodes from the database
     public Set<Episode> readAll() {
         HashSet<Episode> Films = new HashSet<>();
         Connection con = DAOConnection.getInstance().connect();

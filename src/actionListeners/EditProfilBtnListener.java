@@ -11,7 +11,7 @@ import java.time.Year;
 public class EditProfilBtnListener implements ActionListener {
     private JTextField id;
     private JTable profileTable;
-
+    // makes it possible for the user to edit the profile table in the database
     public EditProfilBtnListener(JTable profileTable,  JTextField accountnr) {
         this.profileTable = profileTable;
         this.id = accountnr;

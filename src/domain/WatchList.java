@@ -38,7 +38,7 @@ public class WatchList extends JFrame {
         BuildForm();
         populatefilmAndSerielist();
     }
-
+//create or edits a Serie or Film depending of the Type of this object
     private void BuildForm() {
         add(panelWatchlist);
         setTitle("Watch");
@@ -48,6 +48,7 @@ public class WatchList extends JFrame {
         episodesButton.addActionListener(new selectserieforprofile(episodeList,filmAndSerielist,this , episodesButton));
     }
 
+    //fils the table in the selection screen with Serie if the type equals Serie
     public void populatefilmAndSerielist() {
         filmAndSerielist.setModel(new DefaultTableModel(
                 new Object[][]{
@@ -107,7 +108,7 @@ public class WatchList extends JFrame {
                 ", account='" + Profile +
                 '}';
     }
-
+// fils the second table with episodes if type equals Serie
     public void populateepisodeList(String serie) {
         if (type.equals("Serie")) {
             episodeList.setModel(new DefaultTableModel(
@@ -130,6 +131,7 @@ public class WatchList extends JFrame {
             }
     }
     }
+    //emptys the episode list when selecting another serie so the Episodes of two series don't overlap
     public void populateEmptyEpisodeList() {
         if (type.equals("Serie")) {
             DefaultTableModel model = (DefaultTableModel) episodeList.getModel();

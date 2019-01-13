@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 public class AddProfileBtnListener implements ActionListener {
 private JTable accountTable;
 
+//adds a new profile to the classes so it can be setup for the database
     public AddProfileBtnListener(JTable accountsTable){
         this.accountTable = accountsTable;
     }

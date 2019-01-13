@@ -19,6 +19,7 @@ public class profileWatchlist implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (profileTable.getSelectedRow()>-1){
+            //adds programs to the watchList class so it can be used to place new watchedprograms in the database later
             new WatchList(type, profileTable.getValueAt(profileTable.getSelectedRow(),0).toString(), profileTable.getValueAt(profileTable.getSelectedRow(),1).toString()).setVisible(true);
         }
     }

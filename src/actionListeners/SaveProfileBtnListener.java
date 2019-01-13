@@ -25,6 +25,7 @@ public class SaveProfileBtnListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //make it possible to save the profile in the database
         String date = Date.getText();
         if (editing) {
             DAOProfile.getInstance().saveProfile(name.getText(), date,  AccountName.getText());

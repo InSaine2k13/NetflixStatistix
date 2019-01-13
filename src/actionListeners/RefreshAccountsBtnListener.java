@@ -15,7 +15,7 @@ public class RefreshAccountsBtnListener implements ActionListener {
         this.accountsTable = accountsTable;
         this.mainForm = mainForm;
     }
-
+//reload the account table
     @Override
     public void actionPerformed(ActionEvent e) {
         mainForm.populateAccountTable();

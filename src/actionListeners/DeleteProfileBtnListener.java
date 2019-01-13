@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class DeleteProfileBtnListener implements ActionListener {
     private MainForm mainForm;
     private JTable ProfileTable;
-
+    // removes the selected profile from the database
     public DeleteProfileBtnListener(MainForm mainForm,JTable profileTable) {
         this.mainForm = mainForm;
         this.ProfileTable=profileTable;

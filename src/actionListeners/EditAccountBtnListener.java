@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class EditAccountBtnListener implements ActionListener {
     private JTable accountsTable;
-
+// makes it possible for the user to edit the account table in the database
     public EditAccountBtnListener(JTable accountsTable){
         this.accountsTable = accountsTable;
     }

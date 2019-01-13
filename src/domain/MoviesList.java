@@ -1,7 +1,7 @@
 package domain;
 
 import javax.swing.*;
-
+//not used
 public class MoviesList extends JFrame {
     private JButton selectMovieBtn;
     private JList movieList;
