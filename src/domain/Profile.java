@@ -21,8 +21,8 @@ public class Profile extends JFrame{
     private String AcountID;
     private String date;
     private int Account;
-
     private HashMap<Program, Integer> watchedPrograms;
+
     private JPanel Labels;
     private JLabel usernameLbl;
     private JLabel firstNameLbl;
@@ -34,7 +34,7 @@ public class Profile extends JFrame{
     private JPanel panel1;
     private JLabel AccountNameLbl;
 
-    public Profile(String name, Date dateOfBirth, HashMap<Program, Integer> watchedPrograms , int AccountName) {
+    public Profile(String name, Date dateOfBirth, HashMap<Program, Integer> watchedPrograms , int AccountName, MainForm m) {
         this.editing=true;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -42,19 +42,19 @@ public class Profile extends JFrame{
         this.Account=AccountName;
         userNameTxt.setEditable(false);
         AccountName1.setEditable(false);
-        buildForm();
+        buildForm(m);
     }
 
-    public Profile(JTable accountsTable) {
+    public Profile(JTable accountsTable,MainForm m) {
 
         this.editing = false;
         userNameTxt.setEditable(true);
         this.AcountID=accountsTable.getValueAt(accountsTable.getSelectedRow(),1).toString();
-        buildForm();
+        buildForm(m);
     }
 
 //code witch opens a new window to edit or create the profile
-    public void buildForm(){
+    public void buildForm(MainForm m){
         add(panel1);
 
         setTitle("Profile");
@@ -67,7 +67,7 @@ public class Profile extends JFrame{
             AccountName1.setText(AcountID);
         }
 
-        saveButton.addActionListener(new SaveProfileBtnListener(editing, userNameTxt,firstNameTxt,AccountName1));
+        saveButton.addActionListener(new SaveProfileBtnListener(editing, userNameTxt,firstNameTxt,AccountName1, m));
     }
 
     public String getName() {
