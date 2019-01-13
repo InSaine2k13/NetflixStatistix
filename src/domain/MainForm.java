@@ -54,6 +54,7 @@ public class MainForm extends JFrame {
     private JTable AVGSerieTable;
     private JButton LoadAVGPercentage;
     private JLabel AvgLabelSerie;
+    private JButton refreshButton;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
