@@ -85,8 +85,8 @@ public class MainForm extends JFrame {
         newAccountBtn.addActionListener(new NewAccountBtnListener());
         editAccountBtn.addActionListener(new EditAccountBtnListener(accountsTable));
         deleteAccountBtn.addActionListener(new DeleteAccountBtnListener(this,accountsTable));
-        createProfileBtn.addActionListener(new AddProfileBtnListener(accountsTable));
-        newProfileBtn.addActionListener(new EditProfilBtnListener(profileTable, EditIDNR));
+        createProfileBtn.addActionListener(new AddProfileBtnListener(accountsTable, this));
+        newProfileBtn.addActionListener(new EditProfilBtnListener(profileTable, EditIDNR, this));
         deleteProfileBtn.addActionListener(new DeleteProfileBtnListener(this,profileTable));
         watchEpisodeBtn.addActionListener(new profileWatchlist(profileTable,"Serie"));
         watchMovieBtn.addActionListener(new profileWatchlist(profileTable, "Film"));

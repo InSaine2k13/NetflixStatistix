@@ -41,7 +41,8 @@ public class DAOProfile {
                         rs.getString("Name"),
                         calendar,
                         null,
-                        rs.getInt("AccountID")
+                        rs.getInt("AccountID"),
+                        null
                 );
 
                 HashMap<Program, Integer> watchedPrograms = readWatchedPrograms(rs.getInt("ID"));
@@ -150,7 +151,8 @@ public class DAOProfile {
                         rs.getString("Name"),
                         null,
                         null,
-                        rs.getInt("AccountID")
+                        rs.getInt("AccountID"),
+                        null
                 );
                 profiles.add(pf);
             }
