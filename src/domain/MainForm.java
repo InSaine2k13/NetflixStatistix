@@ -248,6 +248,7 @@ public class MainForm extends JFrame {
 
                 },
                 new String [] {
+                        "ID",
                         "Naam",
                         "Straat",
                         "Housenummer",
@@ -262,14 +263,15 @@ public class MainForm extends JFrame {
         listModel = new DefaultListModel();
         Set<Account> accounts = AccountController.getInstance().readAllAccounts();
         DefaultTableModel model = (DefaultTableModel) accountsTable.getModel();
-        Object rowData[] = new Object[5];
+        Object rowData[] = new Object[6];
 
         for(Account a : accounts){
-            rowData[0] = a.getName();
-            rowData[1] = a.getStreet();
-            rowData[2] = a.getHouseNumber();
-            rowData[3] = a.getHouseNumberAddition();
-            rowData[4] = a.getResidence();
+            rowData[0] = a.getId();
+            rowData[1] = a.getName();
+            rowData[2] = a.getStreet();
+            rowData[3] = a.getHouseNumber();
+            rowData[4] = a.getHouseNumberAddition();
+            rowData[5] = a.getResidence();
             model.addRow(rowData);
             model2.addElement(a.getName());
         }

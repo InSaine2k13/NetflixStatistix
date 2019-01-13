@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Account extends JFrame{
     private boolean editing;
+    private int id;
     private String name;
     private String street;
     private String houseNumber;
@@ -41,7 +42,8 @@ public class Account extends JFrame{
     /**
      * Custom constructor used when called by Edit button.
      */
-    public Account(String name, String street, String houseNumber, String houseNumberAddition, String residence, ArrayList<Profile> profiles) {
+    public Account(int id,String name, String street, String houseNumber, String houseNumberAddition, String residence, ArrayList<Profile> profiles) {
+        this.id = id;
         this.editing = true;
         this.name = name;
         this.street = street;
@@ -69,6 +71,9 @@ public class Account extends JFrame{
         cityTxt.setText(residence);
 
         saveButton.addActionListener(new SaveAccountBtnListener(editing, usernameTxt, streetTxt, houseNumberTxt, houseNumberAdditionTxt,cityTxt));
+    }
+    public int getId() {
+        return id;
     }
 
     //Method to get the Name of the account from another class

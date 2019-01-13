@@ -108,6 +108,7 @@ public class DAOAccount {
 
             while (rs.next()) {
                 account = new Account(
+                        rs.getInt("ID"),
                         rs.getString("Name"),
                         rs.getString("Street"),
                         rs.getString("HouseNumber"),
@@ -148,6 +149,7 @@ public class DAOAccount {
 
             while (rs.next()) {
                 Account ac = new Account(
+                        rs.getInt("ID"),
                         rs.getString("Name"),
                         rs.getString("Street"),
                         rs.getString("HouseNumber"),
@@ -190,6 +192,7 @@ public class DAOAccount {
 
             while (rs.next()) {
                 Account ac = new Account(
+                        rs.getInt("ID"),
                         rs.getString("Name"),
                         rs.getString("Street"),
                         rs.getString("HouseNumber"),
