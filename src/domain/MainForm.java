@@ -54,7 +54,7 @@ public class MainForm extends JFrame {
     private JTable AVGSerieTable;
     private JButton LoadAVGPercentage;
     private JLabel AvgLabelSerie;
-    private JButton refreshButton;
+    private JButton RefreshSingleProfileAccountsBtn;
     private JTextField EditprofielNameTxt1;
     private JTextField EditIDNR;
     private JButton terugButton;
@@ -94,7 +94,8 @@ public class MainForm extends JFrame {
         selectAccountButton.addActionListener(new SelectAccountBtnListener(watchedMoviesList,ListAccount));
         LoadAVGPercentage.addActionListener(new AvgPercentageBtnListener(AVGSerieTable, AvgLabelSerie));
         serieWatchLengthTab.addComponentListener(new ComponentAdapter() {});
-        refreshBtn.addActionListener(new RefreshAccountsBtnListener(accountsTable, this));
+        refreshBtn.addActionListener(new RefreshAccountsBtnListener( this));
+        RefreshSingleProfileAccountsBtn.addActionListener(new RefreshSingleProfileAccountsBtnListener(this));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
