@@ -49,7 +49,7 @@ public class Profile extends JFrame{
 
         this.editing = false;
         userNameTxt.setEditable(true);
-        this.AcountID=accountsTable.getValueAt(accountsTable.getSelectedRow(),0).toString();
+        this.AcountID=accountsTable.getValueAt(accountsTable.getSelectedRow(),1).toString();
         buildForm();
     }
 
