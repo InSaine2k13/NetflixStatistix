@@ -53,7 +53,11 @@ public class DAOFilm {
 
         return film;
     }
-
+    /**
+     * Gets a watched film from the database with the given Account
+     * @param Account
+     * @return film
+     */
     public Set<Film> readAccount(String Account) {
         Set<Film> film = new HashSet<Film>();
         Connection con = DAOConnection.getInstance().connect();
@@ -95,7 +99,7 @@ public class DAOFilm {
 
         try {
             Statement st = con.createStatement();
-            String SQL = "SELECT Title,ProgramType,p.ID,Duration,f.AgeIndication, F.Genre, F.Language FROM Program p INNER JOIN Film f ON p.id = f.ProgramID WHERE ProgramType = 'Film' AND Duration = (SELECT MAX(Duration) From Program) AND f.AgeIndication < 16";
+            String SQL = "SELECT Title,ProgramType,p.ID,Duration,f.AgeIndication, F.Genre, F.[Language] FROM Program p INNER JOIN Film f ON p.id = f.ProgramID WHERE ProgramType = 'Film' AND Duration = (SELECT MAX(Duration) From Program WHERE ID IN (SELECT ProgramID FROM Film WHERE AgeIndication < '16') )";
             ResultSet rs = st.executeQuery(SQL);
 
             while(rs.next()) {
@@ -129,7 +133,7 @@ public class DAOFilm {
         }
         return instance;
     }
-
+//reads all films in the film database
     public Set<Film> readAll() {
         HashSet<Film> Films = new HashSet<>();
         Connection con = DAOConnection.getInstance().connect();
@@ -169,6 +173,7 @@ public class DAOFilm {
         return Films;
     }
 
+    //all films that have been fully watched
     public int GetAmountWatchedFullyByFilm(int filmId){
         Connection con = DAOConnection.getInstance().connect();
 
@@ -192,6 +197,7 @@ public class DAOFilm {
         return 0;
     }
 
+    //get how many times this film is watched in total
     public int GetAmountWatchedByFilm(int filmId){
         Connection con = DAOConnection.getInstance().connect();
 
