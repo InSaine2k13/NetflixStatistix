@@ -1,0 +1,1 @@
+voer de applicatie uit door hem te runnen via IntelliJ of openen via de src map en dan Application.java
